@@ -1,0 +1,20 @@
+# node_modules
+node_modules
+
+# output dir
+dist
+
+# Jetbrains
+.idea
+
+# Visual Studio Code
+.vscode
+
+# Mac book DS_Store
+**/.DS_Store
+
+# release WASM code
+res
+
+# build target
+target
