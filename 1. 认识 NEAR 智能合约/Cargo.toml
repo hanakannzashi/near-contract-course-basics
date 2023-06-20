@@ -10,3 +10,11 @@ crate-type = ["cdylib"]
 
 [dependencies]
 near-sdk = "4.1.1"
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true
