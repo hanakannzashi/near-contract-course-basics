@@ -14,7 +14,7 @@ dist
 **/.DS_Store
 
 # release WASM code
-res
+*/res
 
 # build target
-target
+*/target

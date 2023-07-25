@@ -9,11 +9,16 @@
 
 学习本篇之前，希望你拥有以下前置知识
 * [Rust](https://www.rust-lang.org/zh-CN) 编程语言基础
-* [NEAR](https://docs.near.org/concepts/basics/protocol) 区块链基本概念
+* [NEAR](https://docs.near.org/concepts/basics/protocol) 区块链核心概念
+  * Account Model (Abstract Account、Multi-Key、Key Permission)
+  * Transaction
+  * Action
+  * Receipt
+  * Signer, Predecessor, Receiver
 
 ## 章节列表
 1. [认识 NEAR 智能合约](./1.%20认识%20NEAR%20智能合约/README.md)
-2. 合约的编译与部署
+2. [合约的编译与部署](./2.%20合约的编译与部署/README.md)
 3. 容器与状态存储
 4. 跨合约调用与回调函数
 5. 单元测试
