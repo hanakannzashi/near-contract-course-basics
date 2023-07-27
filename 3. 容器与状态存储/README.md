@@ -40,7 +40,7 @@ NEAR 链上数据以 Key - Value 的形式存储，可以看做一个大的 Map
 ```
 
 ## 容器
-near sdk 提供了两个容器模块，分别是 `near_sdk::store` 和 `near_sdk::collections`，其中前者带有 cache，操作只有当合约方法执行完毕才会序列化到链上，后者每次操作都会立即序列化到链上
+near sdk 提供了两个容器模块，分别是 `near_sdk::store` 和 `near_sdk::collections` (以下简称 Store 和 Legacy Collections)。其中前者带有 cache，操作只有当合约方法执行完毕才会序列化到链上，后者每次操作都会立即序列化到链上
 
 常用容器有
 * `LookupMap ` 不可迭代的 Map
@@ -51,3 +51,8 @@ near sdk 提供了两个容器模块，分别是 `near_sdk::store` 和 `near_sdk
 * `LazyOption` Lazy 数据类型，适合存储大型数据，如 metadata
 
 由于每种容器在插入数据时都会产生一条新的链上记录，因此需要有唯一的前缀与容器绑定，用于区分不同容器的数据。因此这些容器在初始化时都需要传入唯一的 storage key 作为记录前缀
+
+## 注意事项
+Store 和 Legacy Collections 不仅是有没有 cache 的区别，在使用方法上也有区别。比如 Store 中的 `LookupMap` 的 `get_mut` 方法返回的 `Option<&mut V>` 是一个引用类型；而 Legacy Collections 中的 `LookupMap` 的 `get` 方法返回的 `Option<V>` 是一个所有权类型
+
+这意味着如果对从容器中取出来的数据进行了修改，当使用 Legacy Collections 时，应该调用 `insert` 把修改结果重新保存；而当使用 Store 时则不需要额外处理
