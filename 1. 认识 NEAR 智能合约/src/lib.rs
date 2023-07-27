@@ -18,7 +18,6 @@ pub struct Contract {
 #[near_bindgen] // 定义合约方法
 impl Contract {
     #[init] // 标记合约初始化方法
-    #[private] // 标记仅自身可以调用的方法
     pub fn init(owner_id: AccountId) -> Self {
         Self {
             owner_id,
