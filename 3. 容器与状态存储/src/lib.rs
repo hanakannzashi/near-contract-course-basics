@@ -7,16 +7,18 @@ use near_sdk::{env, near_bindgen, require, AccountId, BorshStorageKey, PanicOnDe
 pub struct Contract {
     owner_id: AccountId,
     // 来自 `near_sdk::store`
-    // 该容器内的数据与容器本身分开存储，容器本身是根结构的一部分，但内部数据是独立的存储记录
+    // 该容器内的数据与容器本身分开存储, 容器本身是根结构的一部分, 但内部数据是独立的存储记录
     descriptions: LookupMap<AccountId, String>,
 }
 
-// 所有的 `near_sdk::store` 或 `near_sdk::collections` 容器在初始化的时候都需要唯一的 storage key
-// 枚举类型恰好可以在序列化时保证唯一性
+// near sdk 提供的容器在初始化的时候都需要唯一的 storage key
+// 可以使用 `BorshStorageKey` 宏来获取 storage key. 它将枚举值按顺序以 u8 的方式进行 borsh 序列化, 最多可以得到 256 种不同的 storage key
 #[derive(BorshSerialize, BorshStorageKey)]
 enum StorageKey {
-    Descriptions, // 以 0_u8 的方式 borsh 序列化
-    OtherKey,     // 以 1_u8 的方式 borsh 序列化
+    Descriptions, // 以 0u8 的方式 borsh 序列化
+
+    #[allow(unused)]
+    OtherKey, // 以 1u8 的方式 borsh 序列化, 该值在本合约中没有被使用, 仅用于教学目的
 }
 
 #[near_bindgen]
