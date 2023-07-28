@@ -6,7 +6,7 @@ use std::collections::HashMap;
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)] // 实现 borsh 序列化，实现不可用的 `default` 方法以通过编译
 pub struct Contract {
     owner_id: AccountId,                      // 合约所有者
-    descriptions: HashMap<AccountId, String>, // 账户及其描述信息。注: `std::collections` 作为数据容器不是最好的选择，此处仅用于教学目的
+    descriptions: HashMap<AccountId, String>, // 账户及其描述信息。注: `std::collections` 作为容器不是最好的选择，因为容器本身与内部数据都存储在相同的记录中。此处仅用于教学目的
 }
 
 // impl Default for Contract {

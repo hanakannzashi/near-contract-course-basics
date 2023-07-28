@@ -6,7 +6,9 @@ use near_sdk::{env, near_bindgen, require, AccountId, BorshStorageKey, PanicOnDe
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
 pub struct Contract {
     owner_id: AccountId,
-    descriptions: LookupMap<AccountId, String>, // 来自 `near_sdk::store`
+    // 来自 `near_sdk::store`
+    // 该容器内的数据与容器本身分开存储，容器本身是根结构的一部分，但内部数据是独立的存储记录
+    descriptions: LookupMap<AccountId, String>,
 }
 
 // 所有的 `near_sdk::store` 或 `near_sdk::collections` 容器在初始化的时候都需要唯一的 storage key
