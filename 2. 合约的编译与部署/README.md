@@ -20,7 +20,7 @@ near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-js](htt
 以上操作全部封装在 makefile 文件中, 使用 `make build` 即可
 
 ## 部署合约
-NEAR 可以将智能合约部署在指定账户, 无需像以太坊一样创建一个新的随机账户
+NEAR 可以将智能合约部署在指定账户, 无需像以太坊一样每次都部署在一个新的账户中
 1. 假设你注册了两个测试网账户 `alice.testnet` 和 `code.testnet`, 一个用于作为主账户, 另一个用于作为合约账户
 2. 部署合约 `near deploy code.testnet ./res/hello_near.wasm`
 3. 初始化合约 `near call code.testnet init '{"owner_id":"alice.testnet"}' --account-id code.testnet`
