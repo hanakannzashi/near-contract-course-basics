@@ -7,7 +7,7 @@ pub trait LinkdropContract {
         &mut self,
         new_account_id: AccountId,
         new_public_key: PublicKey,
-    ) -> PromiseOrValue<bool>;
+    ) -> PromiseOrValue<bool>; // 使用 `PromiseOrValue` 而不使用 `Promise` 作为返回值是为了让方法返回值类型的定义更加清晰
 }
 
 // 宏展开后会生成一个 `pub mod linkdrop_contract`, 包含对 `Promise` 的封装
