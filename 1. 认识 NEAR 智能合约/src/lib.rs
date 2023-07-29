@@ -1,8 +1,8 @@
-use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
+use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize}; // self 必须导入
 use near_sdk::{env, near_bindgen, require, AccountId, PanicOnDefault};
 use std::collections::HashMap;
 
-#[near_bindgen] // 定义合约根结构
+#[near_bindgen] // 定义合约根结构, 一个项目中只能有一个根结构
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)] // 实现 borsh 序列化, 实现不可用的 `default` 方法以通过编译
 pub struct Contract {
     owner_id: AccountId,                      // 合约所有者
