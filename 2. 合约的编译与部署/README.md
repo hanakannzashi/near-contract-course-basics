@@ -15,7 +15,9 @@ near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-js](htt
 1. 进入项目目录 `cd 1.\ 认识\ NEAR\ 智能合约`
 2. 安装 WASM 工具链 `rustup target add wasm32-unknown-unknown`
 3. 编译合约 `RUSTFLAGS="-C link-arg=-s" cargo build --target wasm32-unknown-unknown --release`
-4. 通常我们会将合约 WASM 文件移动到项目根目录下 `mkdir -p ./res && cp ./target/wasm32-unknown-unknown/release/hello_near.wasm ./res/`
+4. 通常我们会将合约 WASM 文件移动到项目根目录下方便后续操作 `mkdir -p ./res && cp ./target/wasm32-unknown-unknown/release/hello_near.wasm ./res/`
+
+以上操作全部封装在 makefile 文件中, 使用 `make build` 即可
 
 ## 部署合约
 NEAR 可以将智能合约部署在指定账户, 无需像以太坊一样创建一个新的随机账户
