@@ -20,6 +20,7 @@ near sdk 针对跨合约调用提供了高级 API, 该 API 本质上是对 Promi
    ```rust
    #[near_bindgen]
    impl Contract {
+       #[private]
        pub fn resolve_create_account(
            &mut self,
            payer_id: AccountId,

@@ -46,6 +46,7 @@ impl Contract {
             ).into()
     }
 
+    #[private]
     pub fn resolve_create_account(
         &mut self,
         payer_id: AccountId,
