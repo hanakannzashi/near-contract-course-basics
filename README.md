@@ -8,10 +8,10 @@
 [NonFungibleToken](https://github.com/near/NEPs/blob/master/neps/nep-0171.md)
 
 学习本篇之前, 希望你拥有以下前置知识
-* 拥有 [Rust](https://www.rust-lang.org/zh-CN) 编程语言基础
-* 掌握 NEAR 区块链[核心概念](CORE.md)
+* [Rust](https://www.rust-lang.org/zh-CN) 编程语言基础
 
 ## 章节列表
+0. [NEAR 区块链核心概念](./0.%20NEAR%20区块链核心概念/README.md)
 1. [认识 NEAR 智能合约](./1.%20认识%20NEAR%20智能合约/README.md)
 2. [合约的编译与部署](./2.%20合约的编译与部署/README.md)
 3. [状态存储与容器](./3.%20状态存储与容器/README.md)
