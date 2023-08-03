@@ -37,7 +37,7 @@ NEAR 链上数据以 Key - Value 的形式存储
 为了解决这个问题, near sdk 提供了两个容器模块, 分别是 `near_sdk::store` 和 `near_sdk::collections` (以下简称 Store 和 Legacy Collections).
 这些容器本身与它们内部的数据是分离的, 当我们向容器中插入一条数据时, 在链上会产生一条 (或多条) 新的记录, 而不是将数据保存为合约根结构的一部分.
 
-⚠️ Store 和 Legacy Collection 的容器均未实现 json 序列化, 因此默认情况下无法把它们作为合约方法的返回值, 如果希望返回容器内的全部数据, 请使用迭代器功能转换为 `std::collections`️
+⚠️ Store 和 Legacy Collection 的容器均未实现 json 序列化, 因此默认情况下无法把它们作为合约方法的返回值. 如果希望返回容器内的部分或全部数据, 请使用迭代器功能转换为标准库容器
 
 ### 使用 Store 或 Legacy Collection 时合约状态示例
 插入数据前
