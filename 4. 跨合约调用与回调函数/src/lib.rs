@@ -47,8 +47,9 @@ impl Contract {
                 // ext 是一个固定的方法, 除了使用 `Self::ext` 之外, 也可以像调用 linkdrop 合约一样先声明接口, 再通过模块进行调用
                 Self::ext(env::current_account_id())
                     // 创建调用 resolve_create_account 的 Promise, 调用逻辑在当前区块不执行
-                    .resolve_create_account(env::predecessor_account_id(), wrapped_amount)
-            ).into()
+                    .resolve_create_account(env::predecessor_account_id(), wrapped_amount),
+            )
+            .into()
     }
 
     #[private] // 标记该方法只能由合约自己调用
@@ -145,18 +146,17 @@ impl Contract {
                 GasWeight(1),
             )
             .then(
-                Promise::new(env::current_account_id())
-                    .function_call_weight(
-                        "resolve_create_account".to_string(),
-                        serde_json::to_vec(&ResolveCreateAccountArgs {
-                            payer_id: env::predecessor_account_id(),
-                            amount: wrapped_amount,
-                        })
-                        .unwrap(),
-                        0,
-                        Gas(0),
-                        GasWeight(1),
-                    ),
+                Promise::new(env::current_account_id()).function_call_weight(
+                    "resolve_create_account".to_string(),
+                    serde_json::to_vec(&ResolveCreateAccountArgs {
+                        payer_id: env::predecessor_account_id(),
+                        amount: wrapped_amount,
+                    })
+                    .unwrap(),
+                    0,
+                    Gas(0),
+                    GasWeight(1),
+                ),
             )
             .into()
     }

@@ -1,9 +1,3 @@
-# node_modules
-node_modules
-
-# output dir
-dist
-
 # Jetbrains
 .idea
 
@@ -13,8 +7,11 @@ dist
 # Mac book DS_Store
 **/.DS_Store
 
-# release WASM code
+# result WASM code
 */res
 
 # build target
 */target
+
+# node_modules
+*/node_modules
