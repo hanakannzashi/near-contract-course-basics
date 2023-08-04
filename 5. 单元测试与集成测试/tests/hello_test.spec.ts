@@ -1,4 +1,4 @@
-import { initContext, Context } from './utils';
+import { initContext, Context } from './context';
 
 let context: Context;
 

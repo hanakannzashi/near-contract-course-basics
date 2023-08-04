@@ -17,6 +17,7 @@ test-unit:
 	@cargo test
 
 test-integration:
+	@yarn
 	@yarn test
 
 test: build test-unit test-integration
