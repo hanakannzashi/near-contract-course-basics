@@ -7,8 +7,8 @@ lint-contract:
 
 lint-integration:
 	@yarn
-	@./node_modules/.bin/eslint tests/**/*.ts --fix
-	@./node_modules/.bin/prettier tests/**/*.ts --write
+	@yarn eslint tests/**/*.ts --fix
+	@yarn prettier tests/**/*.ts --write
 
 lint: lint-contract lint-integration
 
