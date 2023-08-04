@@ -37,16 +37,21 @@ impl Contract {
         // `U128` 是 `u128` 的封装类型, 使用 `String` 的 json 序列化方式, 避免大数在序列化之后产生精度丢失
         let wrapped_amount = U128(amount);
 
-        linkdrop_contract::ext(self.linkdrop_contract_id.clone())                          // ext 是一个固定的方法
-            .with_attached_deposit(amount)                                                 // 附带 NEAR 用于创建账户
-            .create_account(new_account_id, new_public_key)                                // 创建调用 create_account 的 Promise, 调用逻辑在当前区块不执行
+        // ext 是一个固定的方法
+        linkdrop_contract::ext(self.linkdrop_contract_id.clone())
+            // 附带 NEAR 用于创建账户
+            .with_attached_deposit(amount)
+            // 创建调用 create_account 的 Promise, 调用逻辑在当前区块不执行
+            .create_account(new_account_id, new_public_key)
             .then(
-                Self::ext(env::current_account_id())                                       // ext 是一个固定的方法, 除了使用 `Self::ext` 之外, 也可以像调用 linkdrop 合约一样先声明接口, 再通过 `xxx::ext` 调用
-                    .resolve_create_account(env::predecessor_account_id(), wrapped_amount) // 创建调用 resolve_create_account 的 Promise, 调用逻辑在当前区块不执行
+                // ext 是一个固定的方法, 除了使用 `Self::ext` 之外, 也可以像调用 linkdrop 合约一样先声明接口, 再通过模块进行调用
+                Self::ext(env::current_account_id())
+                    // 创建调用 resolve_create_account 的 Promise, 调用逻辑在当前区块不执行
+                    .resolve_create_account(env::predecessor_account_id(), wrapped_amount)
             ).into()
     }
 
-    #[private]
+    #[private] // 标记该方法只能由合约自己调用
     pub fn resolve_create_account(
         &mut self,
         payer_id: AccountId,
@@ -64,7 +69,8 @@ impl Contract {
             // 3. 创建账户失败时, linkdrop 退回给当前合约
             // 4. 当前合约退回给调用者
             // 由于创建账户失败的逻辑被 linkdrop 合约的回调函数处理了, 因此交易本身不会失败, 无法通过回滚逻辑进行退款, 需要手动退款
-            Promise::new(payer_id).transfer(amount.0); // 创建一个 `Promise` 并添加一个 Transfer Action, 转账逻辑在当前区块不执行
+            // 创建一个 `Promise` 并添加一个 Transfer Action, 转账逻辑在当前区块不执行
+            Promise::new(payer_id).transfer(amount.0);
         }
     }
 }
@@ -83,13 +89,17 @@ impl Contract {
 
         linkdrop_contract::ext(self.linkdrop_contract_id.clone())
             .with_attached_deposit(amount)
-            .with_static_gas(Gas(0)) // 不分配固定的 gas, 默认值
-            .with_unused_gas_weight(1) // 剩余 gas 分配时占 1 份, 默认值
+            // 不分配固定的 gas, 默认值
+            .with_static_gas(Gas(0))
+            // 剩余 gas 分配时占 1 份, 默认值
+            .with_unused_gas_weight(1)
             .create_account(new_account_id, new_public_key)
             .then(
                 Self::ext(env::current_account_id())
-                    .with_static_gas(Gas(20_000_000_000_000)) // 分配固定的 20T gas
-                    .with_unused_gas_weight(0) // 不参与剩余 gas 分配
+                    // 分配固定的 20T gas
+                    .with_static_gas(Gas(20_000_000_000_000))
+                    // 不参与剩余 gas 分配
+                    .with_unused_gas_weight(0)
                     .resolve_create_account(env::predecessor_account_id(), wrapped_amount),
             )
             .into()
@@ -122,7 +132,7 @@ impl Contract {
             amount: U128,
         }
 
-        Promise::new(self.linkdrop_contract_id.clone()) // 创建一个 `Promise` 并添加一个 FunctionCall Action
+        Promise::new(self.linkdrop_contract_id.clone())
             .function_call_weight(
                 "create_account".to_string(),
                 serde_json::to_vec(&CreateAccountArgs {
@@ -131,11 +141,11 @@ impl Contract {
                 })
                 .unwrap(),
                 amount,
-                Gas(0),       // 不分配固定的 gas, 默认值
-                GasWeight(1), // 剩余 gas 分配时占 1 份, 默认值
+                Gas(0),
+                GasWeight(1),
             )
             .then(
-                Promise::new(env::current_account_id()) // 创建一个 `Promise` 并添加一个 FunctionCall Action
+                Promise::new(env::current_account_id())
                     .function_call_weight(
                         "resolve_create_account".to_string(),
                         serde_json::to_vec(&ResolveCreateAccountArgs {
@@ -144,8 +154,8 @@ impl Contract {
                         })
                         .unwrap(),
                         0,
-                        Gas(0),       // 不分配固定的 gas, 默认值
-                        GasWeight(1), // 剩余 gas 分配时占 1 份, 默认值
+                        Gas(0),
+                        GasWeight(1),
                     ),
             )
             .into()

@@ -5,8 +5,10 @@ use std::collections::HashMap;
 #[near_bindgen] // 定义合约根结构, 一个项目中只能有一个根结构
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)] // 实现 borsh 序列化, 实现不可用的 `default` 方法以通过编译
 pub struct Contract {
-    owner_id: AccountId,                      // 合约所有者
-    descriptions: HashMap<AccountId, String>, // 账户及其描述信息. 注: `std::collections` 作为容器不是最好的选择, 此处仅用于教学目的
+    // 合约所有者
+    owner_id: AccountId,
+    // 账户及其描述信息. 注: `std::collections` 作为容器不是最好的选择, 此处仅用于教学目的
+    descriptions: HashMap<AccountId, String>,
 }
 
 // 使用 Default 来初始化合约

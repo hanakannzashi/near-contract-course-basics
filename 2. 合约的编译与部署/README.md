@@ -6,6 +6,10 @@ near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-js](htt
 
 1. 安装 `yarn global add near-cli` 或 `cargo install near-cli-rs`. 两种 cli 的二进制命令都是 `near`, 如果你同时安装了两种 cli. 请设置 alias 加以区分
 
+### 切换 RPC
+NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们可能需要使用个人 RPC, 可以通过 [infura](https://infura.io) 免费注册个人 RPC.
+注册完后 js 版 cli 通过 `export NEAR_CLI_TESTNET_RPC_SERVER_URL=${YOUR_RPC_URL}` 即可切换; rs 版 cli (以 macOS 为例) 编辑 `~/Library/Application\ Support/near-cli/config.toml` 文件, 修改其中的 `rpc_url` 字段即可
+
 ## 创建 NEAR 账户
 1. 打开测试网网页钱包地址 [MyNearWallet](https://testnet.mynearwallet.com)
 2. 根据指引注册 NEAR 账户, 保存好助记词 (测试网账户通常以 `.testnet` 结尾)

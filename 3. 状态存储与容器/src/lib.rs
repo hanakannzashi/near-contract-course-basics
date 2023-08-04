@@ -12,13 +12,15 @@ pub struct Contract {
 }
 
 // near sdk 提供的容器在初始化的时候都需要唯一的 storage key
-// 可以使用 `BorshStorageKey` 宏来获取 storage key. 它将枚举值按顺序以 u8 的方式进行 borsh 序列化, 最多可以得到 256 种不同的 storage key
+// 可以使用 `#[derive(BorshStorageKey)]` 宏来获取 storage key. 它将枚举值按顺序以 `u8` 的方式进行 borsh 序列化, 最多可以得到 256 种不同的 storage key
 #[derive(BorshSerialize, BorshStorageKey)]
 enum StorageKey {
-    Descriptions, // 以 0u8 的方式 borsh 序列化
+    // 以 0u8 的方式 borsh 序列化
+    Descriptions,
 
+    // 以 1u8 的方式 borsh 序列化, 该值在本合约中没有被使用, 仅用于教学目的
     #[allow(unused)]
-    OtherKey, // 以 1u8 的方式 borsh 序列化, 该值在本合约中没有被使用, 仅用于教学目的
+    OtherKey,
 }
 
 #[near_bindgen]

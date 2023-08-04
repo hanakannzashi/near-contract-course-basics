@@ -77,7 +77,7 @@ NEAR 链上数据以 Key - Value 的形式存储
 由于每个容器在插入数据时都会在全局状态中产生一条新的记录, 需要有唯一的前缀与容器绑定, 用于区分不同容器的数据.
 因此这些容器在初始化时都需要传入唯一的 storage key 作为记录前缀
 
-可以使用 rust 的 `enum` 类型配合 `BorshStorageKey` 宏得到 storage key
+可以使用 rust 的 `enum` 类型配合 `#[derive(BorshStorageKey)]` 宏得到 storage key
 
 ### Store 与 Legacy Collection 的区别
 |               | Store                                | Legacy Collection |
