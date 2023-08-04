@@ -1,10 +1,6 @@
 {
-  "name": "hello_test",
   "license": "UNLICENSED",
-  "description": "Integration test for hello_test contract",
-  "files": [
-    "tests"
-  ],
+  "description": "Integration test",
   "scripts": {
     "test": "jest --testTimeout 60000 --detectOpenHandles"
   },
