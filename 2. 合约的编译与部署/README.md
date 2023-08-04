@@ -2,7 +2,7 @@
 
 ## 安装 near-cli
 near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-js](https://github.com/near/near-cli) 和 [near-cli-rs](https://github.com/near/near-cli-rs) 两种版本.
-其中 RUST 版是交互式终端, 本教程使用 JavaScript 版
+其中 rs 版是交互式终端, 本教程使用 js 版
 
 1. 安装 `yarn global add near-cli` 或 `cargo install near-cli-rs`. 两种 cli 的二进制命令都是 `near`, 如果你同时安装了两种 cli. 请设置 alias 加以区分
 
