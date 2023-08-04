@@ -1,4 +1,10 @@
 {
+  "name": "hello_test",
+  "license": "UNLICENSED",
+  "description": "Integration test for hello_test contract",
+  "files": [
+    "tests"
+  ],
   "scripts": {
     "test": "jest --testTimeout 60000 --detectOpenHandles"
   },
@@ -8,9 +14,7 @@
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
     "eslint": "^8.23.1",
-    "husky": "^8.0.2",
     "jest": "^29.6.2",
-    "lint-staged": "^13.0.4",
     "near-workspaces": "^3.3.0",
     "prettier": "^2.8.1",
     "ts-jest": "^29.1.1",

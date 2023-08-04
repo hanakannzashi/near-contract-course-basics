@@ -7,7 +7,7 @@
 # Mac book DS_Store
 **/.DS_Store
 
-# result WASM code
+# release WASM code
 */res
 
 # build target
