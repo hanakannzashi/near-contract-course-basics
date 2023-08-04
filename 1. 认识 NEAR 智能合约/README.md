@@ -12,6 +12,7 @@ NEAR 是一条高性能分片 Layer1 公链. NEAR 账户是 NEAR 区块链的访
 2 属于合约内部数据传递, 默认情况下使用 [borsh](https://github.com/near/borsh-rs) 序列化
 
 ## 合约项目结构
+NEAR 合约项目与普通的 Rust 项目结构一致, 你可以使用 `cargo new` 命令来创建
 ```
 .
 ├── Cargo.lock
@@ -20,8 +21,19 @@ NEAR 是一条高性能分片 Layer1 公链. NEAR 账户是 NEAR 区块链的访
     └── lib.rs
 ```
 
-[near-sdk-rs](https://github.com/near/near-sdk-rs) 是 NEAR 合约发开的最常用工具, 我们需要在 [cargo.toml](./Cargo.toml) 中导入该库 `near-sdk = "4.1.1"`. 
-我们需要设置 `crate-type = ["cdylib"]` 用于编译 WASM 二进制文件
+[near-sdk-rs](https://github.com/near/near-sdk-rs) 是 NEAR 合约发开的最常用工具, 我们需要在 `dependencies` 中导入该库
+```toml
+[dependencies]
+near-sdk = "4.1.1"
+```
+
+我们需要设置 `crate-type` 用于编译 WASM 二进制文件
+```toml
+[lib]
+crate-type = ["cdylib"]
+```
+
+配置完成后运行 `cargo fetch` 下载依赖
 
 [lib.rs](./src/lib.rs) 是合约代码的入口, 本教程编写了一个非常简单的智能合约, 该合约有一个所有者权限 `owner_id`, 合约存储账户 `AccountId` 以及账户对应的描述信息 `String`.
 只有合约所有者可以修改描述信息，任何人都可以读取描述信息
