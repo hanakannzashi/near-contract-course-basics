@@ -73,7 +73,7 @@ impl FungibleTokenMetadataProvider for Contract {
         FungibleTokenMetadata {
             spec: FT_METADATA_SPEC.to_string(),
             name: "Hello Fungible Token".to_string(),
-            symbol: "HFT".to_string(),
+            symbol: "HelloFT".to_string(),
             icon: None,
             reference: None,
             reference_hash: None,
