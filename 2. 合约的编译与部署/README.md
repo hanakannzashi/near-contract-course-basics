@@ -1,34 +1,49 @@
 # 第二章 合约的编译与部署
 
 ## 安装 near-cli
-near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-js](https://github.com/near/near-cli) 和 [near-cli-rs](https://github.com/near/near-cli-rs) 两种版本.
-其中 rs 版是交互式终端, 本教程使用 js 版
+near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-rs](https://github.com/near/near-cli-rs) 和 [near-cli-js](https://github.com/near/near-cli) 两种版本.
+其中 rs 版是交互式终端, 并且功能更加强大, 因此本教程选择 rs 版本
 
-1. 安装 `yarn global add near-cli` 或 `cargo install near-cli-rs`. 两种 cli 的二进制命令都是 `near`, 如果你同时安装了两种 cli. 请设置 alias 加以区分
+安装 `cargo install near-cli-rs`
+
+输入 `near` 即可与 cli 交互
+
+![near-cli-rs](./near-cli-rs.png)
 
 ### 切换 RPC
-NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们可能需要使用个人 RPC, 可以通过 [infura](https://infura.io) 免费注册个人 RPC.
-注册完后 js 版 cli 通过 `export NEAR_CLI_TESTNET_RPC_SERVER_URL=${YOUR_RPC_URL}` 即可切换; rs 版 cli (以 macOS 为例) 编辑 `~/Library/Application\ Support/near-cli/config.toml` 文件, 修改其中的 `rpc_url` 字段即可
+NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们可能需要使用个人 RPC, 可以通过 [infura](https://infura.io) 免费注册个人 RPC
 
-## 创建 NEAR 账户
-1. 打开测试网网页钱包地址 [MyNearWallet](https://testnet.mynearwallet.com)
-2. 根据指引注册 NEAR 账户, 保存好助记词 (测试网账户通常以 `.testnet` 结尾)
-3. 将助记词导入终端 `near generate-key ${YOUR_ACCOUNT_ID} --seedPhrase="${YOUR_SEED_PHRASE}"`, 该命令会将你的助记词转换为私钥存储在 `~/.near-credentials/testnet` 目录下
+(以 macOS 为例) 获取测试网 RPC 后编辑 `~/Library/Application\ Support/near-cli/config.toml` 文件, 修改 `[network_connection.testnet]` 下的 `rpc_url` 字段即可切换
+
+## 创建并导入 NEAR 账户
+1. 打开测试网网页钱包 [MyNearWallet](https://testnet.mynearwallet.com), 根据指引注册 NEAR 账户, 保存好助记词 (测试网账户通常以 `.testnet` 结尾)
+2. 将助记词导入终端 `near account import-account using-seed-phrase "${YOUR_SEED_PHRASE}" --seed-phrase-hd-path 'm/44'\''/397'\''/0'\''' network-config testnet`
+或输入 `near` 并根据交互提示一步步操作 (这是更推荐的做法, 因为不会在终端历史记录文件如 `~/.zsh_history` 里留下助记词的痕迹)
+
+导入私钥时, 可以选择保存在 macOS keychain 或 legacy keychain 中
+* 如果保存在 macOS keychain 中, 可以在 macOS 自带的**钥匙串访问**应用中找到私钥文件, 钥匙串名称为 `near-${NETWORK_ID}-${ACCOUNT_ID}`, 钥匙串账户为 `${ACCOUNT_ID}:${PUBLIC_KEY}`.
+当导入同一个账户的多个不同私钥时, 虽然钥匙串名称是相同的, 但由于钥匙串账户不同, 私钥文件不会发生覆盖. 当需要签署交易的时候, 会自动去找钥匙串中可用的私钥进行签名.
+**私钥文件不会被 iCloud 同步**
+* 如果保存在 legacy keychain 中, 可以在 `~/.near-credentials/${NETWORK_ID}` 目录中找到私钥, 包括一个与账户同名的 json 文件和一个与账户同名的目录,
+目录里有一个与公钥同名的 json 文件, 该文件的内容和外面那个 json 是一样的, 都是私钥文件, 只是文件名不一样.
+当导入同一个账户的多个不同私钥时, 最外面的 json 文件不会被覆盖, 而是将新的私钥文件保存在对应目录中. 当需要签署交易的时候, 会自动去找对应目录中可用的私钥进行签名
 
 ## 编译第一章中的示例合约
 1. 进入项目目录 `cd 1.\ 认识\ NEAR\ 智能合约`
 2. 安装 WASM 工具链 `rustup target add wasm32-unknown-unknown`
 3. 编译合约 `RUSTFLAGS="-C link-arg=-s" cargo build --target wasm32-unknown-unknown --release`
-4. 通常我们会将合约 WASM 文件移动到项目根目录下方便后续操作 `mkdir -p ./res && cp ./target/wasm32-unknown-unknown/release/hello_near.wasm ./res/`
+4. 将合约 WASM 文件移动到项目根目录下方便后续操作 `mkdir -p ./res && cp ./target/wasm32-unknown-unknown/release/hello_near.wasm ./res/`
 
-以上操作全部封装在 makefile 文件中, 使用 `make build` 即可
+以上操作已经封装在 makefile 文件中 `make build` 即可
 
-## 部署合约
-NEAR 可以将智能合约部署在指定账户, 无需像以太坊一样每次都部署在一个新的账户中
-1. 假设你注册了两个测试网账户 `alice.testnet` 和 `code.testnet`, 一个用于作为主账户, 另一个用于作为合约账户
-2. 部署合约 `near deploy code.testnet ./res/hello_near.wasm`
-3. 初始化合约 `near call code.testnet init '{"owner_id":"alice.testnet"}' --account-id code.testnet`
+## 部署和交互
+假设你注册了两个测试网账户 `alice.testnet` 和 `code.testnet`, 一个用于作为主账户, 另一个用于作为合约账户
 
-## 与合约交互
-* 调用 Change 方法 `near call code.testnet set_account_description '{"account_id":"bob.testnet","description":"Nice Bob"}' --account-id alice.testnet`
-* 调用 View 方法 `near view code.testnet get_account_description '{"account_id":"bob.testnet"}'`
+* 部署并初始化合约 `near contract deploy code.testnet use-file ./res/hello_near.wasm with-init-call init json-args '{"owner_id":"alice.testnet"}' prepaid-gas '100.000 TeraGas' attached-deposit '0 NEAR' network-config testnet sign-with-keychain send`
+或输入 `near` 并根据交互提示一步步操作
+* 调用 Change 方法 `near contract call-function as-transaction code.testnet set_account_description json-args '{"account_id":"bob.testnet","description":"Nice Bob"}' prepaid-gas '100.000 TeraGas' attached-deposit '0 NEAR' sign-as alice.testnet network-config testnet sign-with-keychain send`
+或输入 `near` 并根据交互提示一步步操作
+* 调用 View 方法 `near contract call-function as-read-only code.testnet get_account_description json-args '{"account_id":"bob.testnet"}' network-config testnet now`
+或输入 `near` 并根据交互提示一步步操作
+
+**不建议直接使用完整的 cli 命令进行交互, 这么长谁记得住啊😭**
