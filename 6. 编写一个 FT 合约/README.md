@@ -66,7 +66,7 @@ pub trait StorageManagement {
     // 查询合约对单个用户需要的存储费范围
     fn storage_balance_bounds(&self) -> StorageBalanceBounds;
 
-    // 查询用户支付的存储费
+    // 查询用户支付的存储费, 对于未注册的用户返回 `None`
     fn storage_balance_of(&self, account_id: AccountId) -> Option<StorageBalance>;
 }
 ```
