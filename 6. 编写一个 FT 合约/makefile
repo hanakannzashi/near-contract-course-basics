@@ -12,3 +12,6 @@ compile:
 	@cp target/wasm32-unknown-unknown/release/$(PACKAGE_NAME).wasm ./res/
 
 build: lint compile
+
+test:
+	@cargo test

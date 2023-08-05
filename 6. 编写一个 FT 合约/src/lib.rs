@@ -25,7 +25,7 @@ enum StorageKey {
 #[near_bindgen]
 impl Contract {
     #[init]
-    pub fn new(owner_id: AccountId) -> Self {
+    pub fn init(owner_id: AccountId) -> Self {
         Self {
             owner_id,
             tokens: FungibleToken::new(StorageKey::FungibleToken),
@@ -124,5 +124,77 @@ impl Contract {
             memo: memo.as_deref(),
         }
         .emit();
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use crate::Contract;
+    use near_contract_standards::fungible_token::core::FungibleTokenCore;
+    use near_contract_standards::storage_management::StorageManagement;
+    use near_sdk::json_types::U128;
+    use near_sdk::test_utils::VMContextBuilder;
+    use near_sdk::{testing_env, AccountId, Balance, ONE_YOCTO};
+
+    fn alice() -> AccountId {
+        "alice.near".parse().unwrap()
+    }
+
+    fn bob() -> AccountId {
+        "bob.near".parse().unwrap()
+    }
+
+    const ONE_TOKEN: Balance = 1_000_000_000_000_000_000;
+
+    #[test]
+    fn test_mint_transfer_burn() {
+        let mut contract = Contract::init(alice());
+
+        // ----------------------------- 给 Bob mint 1000 FT ---------------------------------------
+
+        testing_env!(VMContextBuilder::new()
+            .predecessor_account_id(alice())
+            .build());
+
+        contract.mint(bob(), U128(1000 * ONE_TOKEN), None);
+
+        assert_eq!(contract.ft_balance_of(bob()), U128(1000 * ONE_TOKEN));
+        assert_eq!(contract.ft_total_supply(), U128(1000 * ONE_TOKEN));
+
+        // --------------------------- Bob 给 Alice 转账 200 FT -------------------------------------
+
+        // 给 Alice 注册持有者信息并支付存储费
+        let storage_balance_bounds = contract.storage_balance_bounds();
+
+        testing_env!(VMContextBuilder::new()
+            .predecessor_account_id(alice())
+            .attached_deposit(storage_balance_bounds.min.0)
+            .build());
+
+        contract.storage_deposit(None, None);
+
+        // `ft_transfer` 调用需要附加 1 yocto NEAR
+        testing_env!(VMContextBuilder::new()
+            .predecessor_account_id(bob())
+            .attached_deposit(ONE_YOCTO)
+            .build());
+
+        contract.ft_transfer(alice(), U128(200 * ONE_TOKEN), None);
+
+        assert_eq!(contract.ft_balance_of(bob()), U128(800 * ONE_TOKEN));
+        assert_eq!(contract.ft_balance_of(alice()), U128(200 * ONE_TOKEN));
+        assert_eq!(contract.ft_total_supply(), U128(1000 * ONE_TOKEN));
+
+        // ------------------------------ 销毁 Bob 的 300 FT ----------------------------------------
+
+        testing_env!(VMContextBuilder::new()
+            .predecessor_account_id(alice())
+            .build());
+
+        contract.burn(bob(), U128(300 * ONE_TOKEN), None);
+
+        assert_eq!(contract.ft_balance_of(bob()), U128(500 * ONE_TOKEN));
+        assert_eq!(contract.ft_balance_of(alice()), U128(200 * ONE_TOKEN));
+        assert_eq!(contract.ft_total_supply(), U128(700 * ONE_TOKEN));
     }
 }
