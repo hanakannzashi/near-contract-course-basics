@@ -51,7 +51,7 @@ impl Contract {
     }
 }
 
-// 为合约实现 NEP141 接口
+// 为合约实现 NEP141
 // ft_transfer
 // ft_transfer_call
 // ft_total_supply
@@ -59,7 +59,7 @@ impl Contract {
 // ft_resolve_transfer
 impl_fungible_token_core!(Contract, tokens);
 
-// 为合约实现 NEP145 接口
+// 为合约实现 NEP145
 // storage_deposit
 // storage_withdraw
 // storage_unregister
