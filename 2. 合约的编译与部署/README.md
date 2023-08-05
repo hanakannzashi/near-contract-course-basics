@@ -37,7 +37,7 @@ NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们
 以上操作已经封装在 makefile 文件中 `make build` 即可
 
 ## 部署和交互
-假设你注册了两个测试网账户 `alice.testnet` 和 `code.testnet`, 一个用于作为主账户, 另一个用于作为合约账户
+假设你注册了两个测试网账户 `alice.testnet` 和 `code.testnet`, 一个用于作为主账户, 另一个用于作为合约账户, 私钥保存在 legacy keychain 中
 
 * 部署并初始化合约 `near contract deploy code.testnet use-file ./res/hello_near.wasm with-init-call init json-args '{"owner_id":"alice.testnet"}' prepaid-gas '100.000 TeraGas' attached-deposit '0 NEAR' network-config testnet sign-with-keychain send`
 或输入 `near` 并根据交互提示一步步操作
