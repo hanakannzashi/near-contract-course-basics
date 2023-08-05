@@ -39,7 +39,8 @@ workspaces 并不具备测试能力, 因此需要配合三方测试框架使用,
 ⚠️ jest 测试用例是并行的, 如果多个测试用例修改了同一个合约的状态, 可能会导致测试结果异常
 
 ### 运行集成测试
-使用 `jest --testTimeout 60000 --detectOpenHandles` 命令运行集成测试
+示例代码 [hello_test.spec.ts](./tests/hello_test.spec.ts).
+使用 `yarn jest --testTimeout 60000 --detectOpenHandles` 命令运行集成测试, jest 会自动寻找项目根目录下所有结尾为 `.sepc.ts` 或 `.test.ts` 的文件并执行测试代码
 
 ## 运行测试用例
 使用封装好的 `make test` 命令运行示例代码的单元测试用例和集成测试用例
