@@ -136,6 +136,10 @@ mod test {
     use near_sdk::test_utils::VMContextBuilder;
     use near_sdk::{testing_env, AccountId, Balance, ONE_YOCTO};
 
+    fn owner() -> AccountId {
+        "owner.near".parse().unwrap()
+    }
+
     fn alice() -> AccountId {
         "alice.near".parse().unwrap()
     }
@@ -148,12 +152,12 @@ mod test {
 
     #[test]
     fn test_mint_transfer_burn() {
-        let mut contract = Contract::init(alice());
+        let mut contract = Contract::init(owner());
 
         // ----------------------------- 给 Bob mint 1000 FT ---------------------------------------
 
         testing_env!(VMContextBuilder::new()
-            .predecessor_account_id(alice())
+            .predecessor_account_id(owner())
             .build());
 
         contract.mint(bob(), U128(1000 * ONE_TOKEN), None);
@@ -167,11 +171,11 @@ mod test {
         let storage_balance_bounds = contract.storage_balance_bounds();
 
         testing_env!(VMContextBuilder::new()
-            .predecessor_account_id(alice())
+            .predecessor_account_id(bob())
             .attached_deposit(storage_balance_bounds.min.0)
             .build());
 
-        contract.storage_deposit(None, None);
+        contract.storage_deposit(Some(alice()), None);
 
         // `ft_transfer` 调用需要附加 1 yocto NEAR
         testing_env!(VMContextBuilder::new()
@@ -188,7 +192,7 @@ mod test {
         // ------------------------------ 销毁 Bob 的 300 FT ----------------------------------------
 
         testing_env!(VMContextBuilder::new()
-            .predecessor_account_id(alice())
+            .predecessor_account_id(owner())
             .build());
 
         contract.burn(bob(), U128(300 * ONE_TOKEN), None);
