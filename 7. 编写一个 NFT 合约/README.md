@@ -50,7 +50,7 @@ pub trait NonFungibleTokenResolver {
         previous_owner_id: AccountId,
         receiver_id: AccountId,
         token_id: TokenId,
-        approvals: Option<HashMap<AccountId, u64>>,
+        approved_account_ids: Option<HashMap<AccountId, u64>>,
     ) -> bool;
 }
 ```
