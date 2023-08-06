@@ -1,5 +1,5 @@
 # 第七章 编写一个 NFT 合约
-NFT 即 non fungible token 非同质化通证.
+NFT 即 non fungible token 非同质化通证
 
 NEAR 的 NFT 标准
 * [NEP171](https://github.com/near/NEPs/blob/master/neps/nep-0171.md)

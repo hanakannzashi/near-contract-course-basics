@@ -1,5 +1,5 @@
 # 第六章 编写一个 FT 合约
-FT 即 fungible token 同质化通证.
+FT 即 fungible token 同质化通证
 
 NEAR 的 FT 标准
 * [NEP141](https://github.com/near/NEPs/blob/master/neps/nep-0141.md)
