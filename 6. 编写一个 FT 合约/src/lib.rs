@@ -67,6 +67,7 @@ impl_fungible_token_core!(Contract, tokens);
 // storage_balance_of
 impl_fungible_token_storage!(Contract, tokens);
 
+// 为合约实现 NEP148
 #[near_bindgen]
 impl FungibleTokenMetadataProvider for Contract {
     fn ft_metadata(&self) -> FungibleTokenMetadata {
