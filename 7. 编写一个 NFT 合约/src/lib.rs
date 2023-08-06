@@ -299,9 +299,6 @@ mod test {
         assert_eq!(contract.nft_total_supply(), U128(1));
     }
 
-    // 当用户把 NFT 授权给别的账户时, 别的账户就有权转移这个 NFT, 该功能通常用于在 NFT 市场挂单
-    // 转移 NFT 时, 如果没有传 `approval_id` 参数, 则不校验该值
-    // 否则必须保证传入的参数和实际值一致才能转移成功, 该校验是为了保护挂单中的 NFT 的安全性
     #[test]
     fn test_approve_transfer() {
         let mut contract = Contract::init(owner());

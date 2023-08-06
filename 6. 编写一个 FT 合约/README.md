@@ -39,7 +39,7 @@ pub trait FungibleTokenCore {
 }
 
 pub trait FungibleTokenResolver {
-    // 转账的回调函数, 返回值的含义是实际转账的 FT 数量
+    // `ft_transfer_call` 内部的回调函数
     fn ft_resolve_transfer(
         &mut self,
         sender_id: AccountId,
@@ -80,19 +80,17 @@ near-contract-standards 提供了 `impl_fungible_token_storage` 宏来快速给�
 ### NEP148
 ```rust
 pub trait FungibleTokenMetadataProvider {
-    // FT 的详情
+    // FT 合约详情
     fn ft_metadata(&self) -> FungibleTokenMetadata;
 }
 ```
-
-near-contract-standards 没有提供上述接口的实现, 别忘了自己手动给合约实现一下
 
 ## Mint 和 Burn
 mint 和 burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint 的时候对于没有注册 FT 持有者信息的用户, 需要先注册再 mint.
 也可以让用户自己从合约外部调用 `storage_deposit` 进行注册并支付存储费, 取决于开发者想怎么实现.
 
 ## 接收合约
-如果一个合约需要接收用户转账的 FT, 则该合约需要实现 `ft_on_transfer` 来触发合约相关操作
+如果一个合约需要感知到自己接收了用户转账的 FT, 则该合约需要实现 `ft_on_transfer` 来触发合约相关操作
 ```rust
 pub trait FungibleTokenReceiver {
     // 接收合约的这个方法会被 `ft_transfer_call` 调用, 返回值的含义是退回的 FT 数量
