@@ -83,11 +83,12 @@ NEAR 助记词符合以下规范
 * [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
 
 ### 默认派生路径
-通常情况下助记词默认派生路径为 `m/44'/397'/0'`
+助记词通过派生路径转换为私钥
 
-![master path](./master%20path.png)
+* 不使用 Ledger 时默认派生路径为 `m/44'/397'/0'`
 
-### 默认派生路径 (Ledger)
-使用 Ledger 的情况下助记词默认派生路径为 `m/44'/397'/0'/0'/1'`
+    ![master path](./master%20path.png)
 
-![ledger path](./ledger%20path.png)
+* 使用 Ledger 时默认派生路径为 `m/44'/397'/0'/0'/1'`
+
+    ![ledger path](./ledger%20path.png)
