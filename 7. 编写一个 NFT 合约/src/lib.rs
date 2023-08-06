@@ -321,7 +321,7 @@ mod test {
 
         // ------------------------------- Bob 授权 NFT 给 Alice ------------------------------------
 
-        // `nft_approve` 需要附加一些 NEAR 作为授权账户 id 的存储费, 多余的部分会自动退还
+        // `nft_approve` 需要附加一些 NEAR 作为被授权账户的存储费
         testing_env!(VMContextBuilder::new()
             .predecessor_account_id(bob())
             .attached_deposit(ONE_NEAR / 100) // 附加 0.01 NEAR

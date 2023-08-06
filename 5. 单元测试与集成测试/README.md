@@ -37,4 +37,4 @@ workspaces 并不具备测试能力, 因此需要配合三方测试框架使用,
 运行集成测试 `yarn jest --testTimeout 60000 --detectOpenHandles`, jest 会自动寻找项目根目录下所有后缀为 `.sepc.ts` 或 `.test.ts` 的文件并执行测试代码
 
 ## 运行示例代码
-使用封装好的 `make test` 命令运行示例代码的单元测试和集成测试
+使用封装好的 `make all` 命令运行示例代码的单元测试和集成测试

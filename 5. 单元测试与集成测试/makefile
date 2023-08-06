@@ -12,13 +12,11 @@ lint-integration:
 
 lint: lint-contract lint-integration
 
-compile:
+build:
 	@rustup target add wasm32-unknown-unknown
 	RUSTFLAGS=$(RUSTFLAGS) cargo build --target wasm32-unknown-unknown --release
 	@mkdir -p res
 	@cp target/wasm32-unknown-unknown/release/$(PACKAGE_NAME).wasm ./res/
-
-build: lint-contract compile
 
 test-unit:
 	@cargo test
@@ -26,4 +24,6 @@ test-unit:
 test-integration:
 	@yarn test
 
-test: lint compile test-unit test-integration
+test: test-unit test-integration
+
+all: lint build test

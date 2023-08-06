@@ -20,9 +20,11 @@ near-contract-standards = "4.1.1"
 ```rust
 pub trait FungibleTokenCore {
     // 给普通账户转账. 调用该方法需要附加 1 yocto NEAR 以保证安全性
+    #[payable]
     fn ft_transfer(&mut self, receiver_id: AccountId, amount: U128, memo: Option<String>);
     
     // 给合约账户转账, 以触发合约相关逻辑, 返回值的含义是实际转账的 FT 数量. 调用该方法需要附加 1 yocto NEAR 以保证安全性
+    #[payable]
     fn ft_transfer_call(
         &mut self,
         receiver_id: AccountId,
@@ -40,6 +42,7 @@ pub trait FungibleTokenCore {
 
 pub trait FungibleTokenResolver {
     // `ft_transfer_call` 内部的回调函数
+    #[private]
     fn ft_resolve_transfer(
         &mut self,
         sender_id: AccountId,
@@ -55,6 +58,7 @@ near-contract-standards 提供了 `impl_fungible_token_core` 宏来快速给合�
 ```rust
 pub trait StorageManagement {
     // 注册 FT 持有者信息并支付存储费. 调用该方法需要附加一定量的 NEAR 作为存储费
+    #[payable]
     fn storage_deposit(
         &mut self,
         account_id: Option<AccountId>,
@@ -62,9 +66,11 @@ pub trait StorageManagement {
     ) -> StorageBalance;
     
     // 提取用户已支付的存储费. 调用该方法需要附加 1 yocto NEAR 以保证安全性
+    #[payable]
     fn storage_withdraw(&mut self, amount: Option<U128>) -> StorageBalance;
     
     // 注销 FT 持有者信息并返还存储费. 调用该方法需要附加 1 yocto NEAR 以保证安全性
+    #[payable]
     fn storage_unregister(&mut self, force: Option<bool>) -> bool;
 
     // 查询合约对单个用户需要的存储费范围

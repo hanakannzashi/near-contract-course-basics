@@ -34,7 +34,7 @@ NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们
 3. 编译合约 `RUSTFLAGS="-C link-arg=-s" cargo build --target wasm32-unknown-unknown --release`
 4. 将合约 WASM 文件移动到项目根目录下方便后续操作 `mkdir -p ./res && cp ./target/wasm32-unknown-unknown/release/hello_near.wasm ./res/`
 
-以上操作已经封装在 makefile 文件中 `make build` 即可
+以上操作已经封装在 makefile 文件中 `make all` 即可
 
 ## 部署和交互
 假设你注册了两个测试网账户 `alice.testnet` 和 `code.testnet`, 一个用于作为主账户, 另一个用于作为合约账户, 私钥保存在 legacy keychain 中
