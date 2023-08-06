@@ -75,3 +75,19 @@ NEAR 的账户采用多密钥对模型, 一个账户上面可以绑定多个公�
 * FunctionCall: 只允许签署仅包含特定 FunctionCall Action 的交易
 
 FunctionCall 权限的密钥通常在登陆 APP 的时候生成并给到 App 前端, 让 App 能自动帮用户签署低风险交易, 减少用户与钱包交互的频率, 从而优化用户的体验
+
+## Seed Phrase
+NEAR 助记词符合以下规范
+* [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
+* [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)
+* [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
+
+### 默认派生路径
+通常情况下助记词默认派生路径为 `m/44'/397'/0'`
+
+![master path](./master%20path.png)
+
+### 默认派生路径 (Ledger)
+使用 Ledger 的情况下助记词默认派生路径为 `m/44'/397'/0'/0'/1'`
+
+![ledger path](./ledger%20path.png)
