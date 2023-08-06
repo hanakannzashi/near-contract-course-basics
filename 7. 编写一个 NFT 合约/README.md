@@ -21,7 +21,6 @@ near-contract-standards = "4.1.1"
 ```rust
 pub trait NonFungibleTokenCore {
     // 给普通账户转移 NFT. 调用该方法需要附加 1 yocto NEAR 以保证安全性
-    #[payable]
     fn nft_transfer(
         &mut self,
         receiver_id: AccountId,
@@ -31,7 +30,6 @@ pub trait NonFungibleTokenCore {
     );
     
     // 给合约账户转移 NFT, 以触发合约相关逻辑, 返回值的含义是转移是否成功. 调用该方法需要附加 1 yocto NEAR 以保证安全性
-    #[payable]
     fn nft_transfer_call(
         &mut self,
         receiver_id: AccountId,
@@ -47,7 +45,6 @@ pub trait NonFungibleTokenCore {
 
 pub trait NonFungibleTokenResolver {
     // `nft_transfer_call` 内部的回调函数
-    #[private]
     fn nft_resolve_transfer(
         &mut self,
         previous_owner_id: AccountId,
@@ -68,7 +65,6 @@ pub trait NonFungibleTokenApproval {
     // 否则必须保证传入的参数和实际值一致才能转移成功, 该校验是为了保护挂单中的 NFT 的安全性
     // 当 NFT 成功发生转移之后, 该 NFT 所有的授权都会被重置
     // 调用该方法需要附加一些 NEAR 作为被授权账户的存储费
-    #[payable]
     fn nft_approve(
         &mut self,
         token_id: TokenId,
@@ -77,11 +73,9 @@ pub trait NonFungibleTokenApproval {
     ) -> Option<Promise>;
     
     // 取消某个 NFT 对某个账户的授权. 调用该方法需要附加 1 yocto NEAR 以保证安全性
-    #[payable]
     fn nft_revoke(&mut self, token_id: TokenId, account_id: AccountId);
     
     // 取消某个 NFT 对所有账户的授权. 调用该方法需要附加 1 yocto NEAR 以保证安全性
-    #[payable]
     fn nft_revoke_all(&mut self, token_id: TokenId);
     
     // 判断 NFT 是否授权给某个账户

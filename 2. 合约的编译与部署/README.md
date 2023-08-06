@@ -6,7 +6,7 @@ near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-rs](htt
 
 安装 `cargo install near-cli-rs`
 
-输入 `near` 即可与 cli 交互
+输入 `near` 即可与 cli 交互. 通常我们都会交互式的使用 cli, 因为完整的 cli 命令通常很长, 不容易记
 
 ![near-cli-rs](./near-cli-rs.png)
 
@@ -18,7 +18,7 @@ NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们
 ## 创建并导入 NEAR 账户
 1. 打开测试网网页钱包 [MyNearWallet](https://testnet.mynearwallet.com), 根据指引注册 NEAR 账户, 保存好助记词 (测试网账户通常以 `.testnet` 结尾)
 2. 将助记词导入终端 `near account import-account using-seed-phrase "${YOUR_SEED_PHRASE}" --seed-phrase-hd-path 'm/44'\''/397'\''/0'\''' network-config testnet`
-或输入 `near` 并根据交互提示一步步操作 (这是更推荐的做法, 因为不会在终端历史记录文件如 `~/.zsh_history` 里留下助记词的痕迹)
+或输入 `near` 并根据交互提示一步步操作 (推荐, 因为不会在终端历史记录文件如 `~/.zsh_history` 里留下助记词的痕迹)
 
 导入私钥时, 可以选择保存在 macOS keychain 或 legacy keychain 中
 * 如果保存在 macOS keychain 中, 可以在 macOS 自带的**钥匙串访问**应用中找到私钥文件, 钥匙串名称为 `near-${NETWORK_ID}-${ACCOUNT_ID}`, 钥匙串账户为 `${ACCOUNT_ID}:${PUBLIC_KEY}`.
@@ -45,5 +45,3 @@ NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们
 或输入 `near` 并根据交互提示一步步操作
 * 调用 View 方法 `near contract call-function as-read-only code.testnet get_account_description json-args '{"account_id":"bob.testnet"}' network-config testnet now`
 或输入 `near` 并根据交互提示一步步操作
-
-**不建议直接使用完整的 cli 命令进行交互, 这么长谁记得住啊😭**
