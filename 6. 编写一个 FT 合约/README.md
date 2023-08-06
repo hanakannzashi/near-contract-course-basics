@@ -1,8 +1,12 @@
 # 第六章 编写一个 FT 合约
-FT 即 fungible token 同质化通证. 如同以太坊的 [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) 一样, NEAR 也有自己的 FT 标准 [NEP141](https://github.com/near/NEPs/blob/master/neps/nep-0141.md)
+FT 即 fungible token 同质化通证.
+
+NEAR 的 FT 标准
+* [NEP141](https://github.com/near/NEPs/blob/master/neps/nep-0141.md)
+* [NEP148](https://github.com/near/NEPs/blob/master/neps/nep-0148.md)
 
 ## FT 标准实现
-near sdk 实现了标准的 FT, 实现代码在 `near-contract-standards` 库
+near-contract-standards 实现了标准的 FT
 ```toml
 [dependencies]
 near-sdk = "4.1.1"
@@ -10,7 +14,7 @@ near-contract-standards = "4.1.1"
 ```
 
 其中的 `FungibleToken` 类型即 FT 标准实现, 我们可以将其作为合约的一个字段, 然后把它的实现封装成合约方法.
-`FungibleToken` 不仅实现了 NEP141, 还实现了 [NEP145](https://github.com/near/NEPs/blob/master/neps/nep-0145.md) 和 [NEP148](https://github.com/near/NEPs/blob/master/neps/nep-0148.md)
+标准 FT 不仅实现了 NEP141 和 NEP148, 还实现了存储管理 [NEP145](https://github.com/near/NEPs/blob/master/neps/nep-0145.md)
 
 ### NEP141
 ```rust
@@ -45,7 +49,7 @@ pub trait FungibleTokenResolver {
 }
 ```
 
-near sdk 提供了 `impl_fungible_token_core` 宏来快速给合约实现上述接口
+near-contract-standards 提供了 `impl_fungible_token_core` 宏来快速给合约实现上述接口
 
 ### NEP 145
 ```rust
@@ -71,9 +75,7 @@ pub trait StorageManagement {
 }
 ```
 
-near sdk 提供了 `impl_fungible_token_storage` 宏来快速给合约实现上述接口
-
-标准 FT 实现了存储管理是为了能够让合约不会因存储费不足而无法运行. 当用户持有 FT 的时候, 用户的信息会被记录在合约里, 这会占用存储费, 标准实现让用户自己支付存储费, 以避免合约存储费不足
+near-contract-standards 提供了 `impl_fungible_token_storage` 宏来快速给合约实现上述接口
 
 ### NEP148
 ```rust
@@ -83,7 +85,7 @@ pub trait FungibleTokenMetadataProvider {
 }
 ```
 
-near sdk 没有提供上述接口的实现, 别忘了自己手动给合约实现一下
+near-contract-standards 没有提供上述接口的实现, 别忘了自己手动给合约实现一下
 
 ## Mint 和 Burn
 mint 和 burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint 的时候对于没有注册 FT 持有者信息的用户, 需要先注册再 mint.
