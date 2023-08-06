@@ -1,9 +1,6 @@
 {
   "license": "UNLICENSED",
   "description": "Integration test",
-  "scripts": {
-    "test": "jest --testTimeout 60000 --detectOpenHandles"
-  },
   "devDependencies": {
     "@types/jest": "^29.5.3",
     "@types/node": "^18.16.2",

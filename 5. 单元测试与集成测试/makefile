@@ -22,7 +22,7 @@ test-unit:
 	@cargo test
 
 test-integration:
-	@yarn test
+	@yarn jest --testTimeout 60000 --detectOpenHandles
 
 test: test-unit test-integration
 
