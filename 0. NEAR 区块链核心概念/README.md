@@ -92,5 +92,5 @@ NEAR 助记词符合以下规范
 
 ## 私钥
 NEAR 使用 ed25519 曲线.
-私钥 `base58(32 bytes private key + 32 bytes public key)` 大小为 64 字节, 以 keypair 的形式存储.
+私钥 `base58(32 bytes private key + 32 bytes public key)` 大小为 64 字节.
 公钥 `base58(32 bytes public key)` 大小为 32 字节
