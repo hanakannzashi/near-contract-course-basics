@@ -93,4 +93,4 @@ NEAR 助记词符合以下规范
 
 ![master path](./master%20key%20path.png)
 
-⚠️ 使用 Ledger 时默认派生路径为 `m/44'/397'/0'/0'/1'`
+⚠️ 使用 [Ledger](https://www.ledger.com) 时默认派生路径为 `m/44'/397'/0'/0'/1'`
