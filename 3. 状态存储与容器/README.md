@@ -67,12 +67,12 @@ NEAR 链上数据以 Key - Value 的形式存储
 可以看到合约根结构的 `value` 值并没有变化, 但是产生了一条新的记录, 这些记录只有在需要的时候才会参与反序列化
 
 ### 常用容器
-* `LookupMap ` 不可迭代的映射类型
-* `LookupSet` 不可迭代的集合类型
-* `Vector` 可迭代的列表类型
-* `UnorderedMap` 可迭代的映射类型, 相比 `LookupMap` 存储占用更大
-* `UnorderedSet` 可迭代的集合类型, 相比 `LookupSet` 存储占用更大
-* `LazyOption` 按需加载的数据类型, 适合存储大型数据, 如 metadata
+* `LookupMap `: 不可迭代的映射类型
+* `LookupSet`: 不可迭代的集合类型
+* `Vector`: 可迭代的列表类型
+* `UnorderedMap`: 可迭代的映射类型, 相比 `LookupMap` 存储占用更大
+* `UnorderedSet`: 可迭代的集合类型, 相比 `LookupSet` 存储占用更大
+* `LazyOption`: 按需加载的数据类型, 适合存储大型数据, 如 metadata
 
 由于每个容器在插入数据时都会在全局状态中产生一条新的记录, 需要有唯一的前缀与容器绑定, 用于区分不同容器的数据.
 因此这些容器在初始化时都需要传入唯一的 storage key 作为记录前缀

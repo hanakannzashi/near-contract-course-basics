@@ -18,7 +18,7 @@ near
 ### 切换 RPC
 NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们可能需要使用个人 RPC, 可以通过 [infura](https://infura.io) 免费注册个人 RPC
 
-(以 macOS 为例) 获取测试网 RPC 后编辑 `~/Library/Application\ Support/near-cli/config.toml` 文件, 修改 `[network_connection.testnet]` 下的 `rpc_url` 字段即可切换
+以 macOS 为例, 获取测试网 RPC 后编辑 `~/Library/Application\ Support/near-cli/config.toml` 文件, 修改 `[network_connection.testnet]` 下的 `rpc_url` 字段即可切换 RPC
 
 ## 创建并导入 NEAR 账户
 1. 打开测试网网页钱包 [MyNearWallet](https://testnet.mynearwallet.com), 根据指引注册 NEAR 账户, 保存好助记词
@@ -27,19 +27,18 @@ NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们
     near account import-account using-seed-phrase "${YOUR_SEED_PHRASE}" --seed-phrase-hd-path 'm/44'\''/397'\''/0'\''' network-config testnet
     ```
 
+### Keychain
 导入私钥时, 可以选择保存在 macOS keychain 或 legacy keychain 中
 
-* 如果保存在 macOS keychain 中, 可以在 macOS 自带的**钥匙串访问**应用中找到私钥文件.
+如果保存在 macOS keychain 中, 可以在 macOS 自带的**钥匙串访问**应用中找到私钥文件.
 当导入同一个账户的多个不同私钥时, 虽然钥匙串名称是相同的, 但由于钥匙串账户不同, 私钥文件不会发生覆盖. 当需要签署交易的时候, 会自动去找钥匙串中可用的私钥进行签名.
 **私钥文件不会被 iCloud 同步**
+![macOS keychain](./macOS%20keychain.png)
 
-    ![macOS keychain](./macOS%20keychain.png)
-
-* 如果保存在 legacy keychain 中, 可以在 `~/.near-credentials/${NETWORK_ID}` 目录中找到私钥文件. 包括一个与账户同名的 json 文件和一个与账户同名的目录,
+如果保存在 legacy keychain 中, 可以在 `~/.near-credentials/${NETWORK_ID}` 目录中找到私钥文件. 包括一个与账户同名的 json 文件和一个与账户同名的目录,
 目录里有一个与公钥同名的 json 文件, 该文件的内容和外面那个 json 是一样的, 都是私钥文件, 只是文件名不一样.
 当导入同一个账户的多个不同私钥时, 最外面的 json 文件不会被覆盖, 而是将新的私钥文件保存在对应目录中. 当需要签署交易的时候, 会自动去找对应目录中可用的私钥进行签名
-
-   ![legacy keychain](./legacy%20keychain.png)
+![legacy keychain](./legacy%20keychain.png)
 
 ## 编译第一章中的示例合约
 1. 进入项目目录
