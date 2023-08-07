@@ -1,13 +1,13 @@
 # 第零章 NEAR 区块链核心概念
 NEAR 是一条基于分片的异步区块链, 有一些与其他区块链不同的独特概念
 
-## Block Time
+## 出块时间
 NEAR 的出块时间在 1.2s 左右
 
-## Finality
+## 最终确认
 NEAR 的最终确认时间是 1s 左右
 
-## Sharding
+## 分片
 NEAR 是一条全分片区块链, 没有所谓的主链用于协调分片. 
 验证节点只处理自己分片的交易, 也只打包自己分片的交易.
 验证节点与分片的对应关系是隐藏的, 且会随周期改变.
@@ -53,22 +53,21 @@ Signer 始终是 Alice.
 对于 Alice -> ContractA, Predecessor 是 Alice, Receiver 是 ContractA.
 对于 ContractA -> ContractB, Predecessor 是 ContractA, Receiver 是 ContractB
 
-## Account Model
+## 账户模型
 
-### Named Account
-NEAR 的账户是可读域名账户, 该特性由协议直接支持
+### 域名账户
+NEAR 的账户是可读域名账户
 
 没有 `.` 的账户是顶级账户, 其余都是子账户.
 顶级账户 (32 字符以内) 只能由 [registrar](https://explorer.near.org/accounts/registrar) 创建, 该账户目前受 NEAR Foundation 控制.
 子账户只能由其**直接父账户**创建, 子账户没有级数限制, 只要总长度不超过 64 个字符即可.
 通过对公钥的 16 进制编码可以获得一个长度为 64 个字符的账户, 一般称为 Implicit Account, 其本质是一个顶级账户, 由于占满了 64 个字符, 它不能创建子账户
 
-### Abstract Account
-NEAR 的账户是抽象账户, 可以在指定账户直接部署智能合约, 该特性由协议直接支持
+### 抽象账户
+NEAR 的账户是抽象账户, 可以在指定账户直接部署智能合约
 
-### Multi Key
-创建一个账户即向链上申请一个账户名, 然后绑定一个公钥到该账户名上, 通过对应的私钥访问该账户.
-NEAR 的账户采用多密钥对模型, 一个账户上面可以绑定多个公钥
+### 多密钥对账户
+NEAR 的账户是多密钥对账户, 创建一个账户即向链上申请一个账户名, 然后绑定一个公钥到该账户名上, 通过对应的私钥访问该账户, 一个账户上面可以绑定多个公钥
 
 密钥分为两种权限
 * FullAccess: 完全访问权限
@@ -76,7 +75,7 @@ NEAR 的账户采用多密钥对模型, 一个账户上面可以绑定多个公�
 
 FunctionCall 权限的密钥通常在登陆 APP 的时候生成并给到 App 前端, 让 App 能自动帮用户签署低风险交易, 减少用户与钱包交互的频率, 从而优化用户的体验
 
-## Seed Phrase
+## 助记词
 NEAR 助记词符合以下规范
 * [BIP32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
 * [BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)
