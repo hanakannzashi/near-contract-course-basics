@@ -33,11 +33,13 @@ NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们
 如果保存在 macOS keychain 中, 可以在 macOS 自带的**钥匙串访问**应用中找到私钥文件.
 当导入同一个账户的多个不同私钥时, 虽然钥匙串名称是相同的, 但由于钥匙串账户不同, 私钥文件不会发生覆盖. 当需要签署交易的时候, 会自动去找钥匙串中可用的私钥进行签名.
 **私钥文件不会被 iCloud 同步**
+
 ![macOS keychain](./macOS%20keychain.png)
 
 如果保存在 legacy keychain 中, 可以在 `~/.near-credentials/${NETWORK_ID}` 目录中找到私钥文件. 包括一个与账户同名的 json 文件和一个与账户同名的目录,
 目录里有一个与公钥同名的 json 文件, 该文件的内容和外面那个 json 是一样的, 都是私钥文件, 只是文件名不一样.
 当导入同一个账户的多个不同私钥时, 最外面的 json 文件不会被覆盖, 而是将新的私钥文件保存在对应目录中. 当需要签署交易的时候, 会自动去找对应目录中可用的私钥进行签名
+
 ![legacy keychain](./legacy%20keychain.png)
 
 ## 编译第一章中的示例合约
