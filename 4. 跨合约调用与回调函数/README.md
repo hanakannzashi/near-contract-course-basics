@@ -7,7 +7,7 @@ Receipt 在 near-sdk 中被抽象为 `Promsie`, 发起跨合约调用就是创�
 near-sdk 针对跨合约调用提供了高级 API, 该 API 本质上是对 Promise 的封装
 
 ## 跨合约调用示例 (使用高级 API)
-该合约可以通过调用 linkdrop 合约提供的 `create_account` 方法创建一个子账户, 用户需要支付一定的 NEAR 作为初始余额, 如果创建失败, 则退回这笔费用
+该合约可以通过调用 [linkdrop](https://github.com/near/near-linkdrop) 合约提供的 `create_account` 方法创建一个该合约账户的子账户, 用户需要支付一定的 NEAR 作为初始余额, 如果创建失败, 则退回这笔费用
 
 1. 在 [cross.rs](./src/cross.rs) 中声明 linkdrop 合约方法的接口
    ```rust
