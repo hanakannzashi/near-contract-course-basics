@@ -43,7 +43,9 @@ enum StorageKey {
     ///         let vector = Vector::new(StorageKey::DynamicKey {
     ///             account_id: env::sha256_array(account_id.as_bytes()),
     ///         });
-    ///         self.accounts.insert(account_id, vector);
+    ///         if self.accounts.insert(account_id, vector).is_some() {
+    ///             panic!("Account already exists");
+    ///         };
     ///     }
     /// }
     /// ```
