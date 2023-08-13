@@ -22,7 +22,7 @@ enum StorageKey {
 
     // 以 1u8 的方式 borsh 序列化
     #[allow(unused)]
-    OtherKey,
+    SecondKey,
 
     /// 动态的 storage key, 通常用于容器嵌套的情况
     ///
