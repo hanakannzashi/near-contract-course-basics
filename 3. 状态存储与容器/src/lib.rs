@@ -1,6 +1,8 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::store::LookupMap;
-use near_sdk::{env, near_bindgen, require, AccountId, BorshStorageKey, PanicOnDefault};
+use near_sdk::{
+    env, near_bindgen, require, AccountId, BorshStorageKey, CryptoHash, PanicOnDefault,
+};
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
@@ -18,9 +20,37 @@ enum StorageKey {
     // 以 0u8 的方式 borsh 序列化
     Descriptions,
 
-    // 以 1u8 的方式 borsh 序列化, 该值在本合约中没有被使用, 仅用于教学目的
+    // 以 1u8 的方式 borsh 序列化
     #[allow(unused)]
     OtherKey,
+
+    /// 动态的 storage key, 通常用于容器嵌套的情况
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use near_sdk::store::{LookupMap, Vector};
+    ///
+    /// #[near_bindgen]
+    /// #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
+    /// pub struct Contract {
+    ///     accounts: LookupMap<AccountId, Vector<String>>
+    /// }
+    ///
+    /// #[near_bindgen]
+    /// impl Contract {
+    ///     pub fn create(&mut self, account_id: AccountId) {
+    ///         let vector = Vector::new(StorageKey::DynamicKey {
+    ///             account_id: env::sha256_array(account_id.as_bytes()),
+    ///         });
+    ///         self.accounts.insert(account_id, vector);
+    ///     }
+    /// }
+    /// ```
+    #[allow(unused)]
+    DynamicKey {
+        account_id: CryptoHash,
+    },
 }
 
 #[near_bindgen]
