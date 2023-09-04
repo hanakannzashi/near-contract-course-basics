@@ -125,15 +125,15 @@ impl Contract {
 
         // 更新或添加 token_owner_id -> token_ids 映射
         if let Some(tokens_per_owner) = &mut self.tokens.tokens_per_owner {
-            let mut owner_tokens = tokens_per_owner.get(account_id).unwrap_or_else(|| {
+            let mut token_ids = tokens_per_owner.get(account_id).unwrap_or_else(|| {
                 UnorderedSet::new(
                     near_contract_standards::non_fungible_token::core::StorageKey::TokensPerOwner {
-                        account_hash: env::sha256(account_id.as_bytes()),
+                        account_hash: env::sha256(&account_id.try_to_vec().unwrap()), // 也可以用 `account_id.as_bytes()`, 但使用 borsh 字节更加通用
                     },
                 )
             });
-            owner_tokens.insert(token_id);
-            tokens_per_owner.insert(account_id, &owner_tokens);
+            token_ids.insert(token_id);
+            tokens_per_owner.insert(account_id, &token_ids);
         }
 
         // 添加 token_id -> token_metadata 映射
@@ -161,10 +161,10 @@ impl Contract {
 
         // 更新或移除 token_owner_id -> token_ids 映射
         if let Some(tokens_per_owner) = &mut self.tokens.tokens_per_owner {
-            if let Some(mut owner_tokens) = tokens_per_owner.remove(account_id) {
-                owner_tokens.remove(token_id);
-                if !owner_tokens.is_empty() {
-                    tokens_per_owner.insert(account_id, &owner_tokens);
+            if let Some(mut token_ids) = tokens_per_owner.remove(account_id) {
+                token_ids.remove(token_id);
+                if !token_ids.is_empty() {
+                    tokens_per_owner.insert(account_id, &token_ids);
                 }
             }
         };
