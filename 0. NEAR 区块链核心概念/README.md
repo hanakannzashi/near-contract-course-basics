@@ -7,6 +7,16 @@ NEAR 的出块时间在 1.2s 左右
 ## 最终确认
 NEAR 的最终确认时间是 1s 左右
 
+## 单位换算
+`1 NEAR = 10^24 yoctoNEAR`
+
+`1 Tgas = 10^12 gas`. 单笔交易 gas 消耗上限为 `300 Tgas`
+
+## 存储与 gas 价格
+NEAR 的存储价格为 `10^-5 NEAR / byte`
+
+NEAR 的 gas 价格为 `10^-4 NEAR / Tgas`
+
 ## 分片
 NEAR 是一条全分片区块链, 没有所谓的主链用于协调分片. 
 验证节点只处理自己分片的交易, 也只打包自己分片的交易.
@@ -29,10 +39,13 @@ Action 是 NEAR 链上操作的基本单位
 ## Transaction
 Transaction 是由用户私钥签名并支付 gas 费发起的一系列修改链上状态的 Action 的集合.
 
-Transaction 包括三个关键参数
+Transaction 包括几个关键参数
 * signer id: 交易签名者
 * receiver id: 交易接收者
 * actions: Action 列表
+* txHash: 最近的任意一笔链上交易的哈希
+* publicKey: 用于验证签名的公钥
+* nonce: 比公钥当前 nonce 值大的新 nonce 值
 
 ## Receipt
 Receipt 是为了处理跨分片通信而存在的概念.
