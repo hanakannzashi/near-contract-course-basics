@@ -55,7 +55,7 @@ pub trait NonFungibleTokenResolver {
 }
 ```
 
-near-contract-standards 提供了 `impl_non_fungible_token_core` 宏来快速给合约实现上述接口
+`near-contract-standards` 提供了 `impl_non_fungible_token_core` 宏来快速给合约实现上述接口
 
 ### NEP 178
 ```rust
@@ -90,7 +90,7 @@ pub trait NonFungibleTokenApproval {
 }
 ```
 
-near-contract-standards 提供了 `impl_non_fungible_token_approval` 宏来快速给合约实现上述接口
+`near-contract-standards` 提供了 `impl_non_fungible_token_approval` 宏来快速给合约实现上述接口
 
 ### NEP181
 ```rust
@@ -118,7 +118,7 @@ pub trait NonFungibleTokenEnumeration {
 }
 ```
 
-near-contract-standards 提供了 `impl_non_fungible_token_enumeration` 宏来快速给合约实现上述接口
+`near-contract-standards` 提供了 `impl_non_fungible_token_enumeration` 宏来快速给合约实现上述接口
 
 ### NEP 177
 ```rust
@@ -129,7 +129,7 @@ pub trait NonFungibleTokenMetadataProvider {
 ```
 
 ## Mint 和 Burn
-Mint 和 Burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint NFT 会大量占用存储, 需要关注合约中用于存储质押的 NEAR 是否足够
+mint 和 burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint NFT 会大量占用存储, 需要关注合约中用于存储质押的 NEAR 是否足够
 
 ## 接收合约
 如果一个合约需要感知到自己接收了用户转账的 NFT, 则该合约需要实现 `nft_on_transfer` 来触发合约相关操作

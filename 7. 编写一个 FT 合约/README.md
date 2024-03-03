@@ -49,7 +49,7 @@ pub trait FungibleTokenResolver {
 }
 ```
 
-near-contract-standards 提供了 `impl_fungible_token_core` 宏来快速给合约实现上述接口
+`near-contract-standards` 提供了 `impl_fungible_token_core` 宏来快速给合约实现上述接口
 
 ### NEP 145
 ```rust
@@ -75,7 +75,7 @@ pub trait StorageManagement {
 }
 ```
 
-near-contract-standards 提供了 `impl_fungible_token_storage` 宏来快速给合约实现上述接口
+`near-contract-standards` 提供了 `impl_fungible_token_storage` 宏来快速给合约实现上述接口
 
 ### NEP148
 ```rust
@@ -86,7 +86,7 @@ pub trait FungibleTokenMetadataProvider {
 ```
 
 ## Mint 和 Burn
-Mint 和 Burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint 的时候对于没有注册 FT 持有者信息的用户, 需要先注册再 mint.
+mint 和 burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint 的时候对于没有注册 FT 持有者信息的用户, 需要先注册再 mint.
 也可以让用户自己从合约外部调用 `storage_deposit` 进行注册并支付存储费, 取决于开发者想怎么实现
 
 ## 接收合约
