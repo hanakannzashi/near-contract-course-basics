@@ -8,8 +8,8 @@ NEAR 是一条高性能分片 Layer1 公链. NEAR 账户是 NEAR 区块链的访
 2. 读写合约状态
 3. 返回调用结果时的返回值传递
 
-1 和 3 属于合约外部数据传递, 默认情况下使用 [json](https://github.com/serde-rs/json) 序列化.
-2 属于合约内部数据传递, 默认情况下使用 [borsh](https://github.com/near/borsh-rs) 序列化
+1 和 3 属于合约外部数据传递, 默认情况下使用 [JSON](https://github.com/serde-rs/json) 序列化.
+2 属于合约内部数据传递, 默认情况下使用 [Borsh](https://github.com/near/borsh-rs) 序列化
 
 ## 合约项目结构
 NEAR 合约项目与普通的 Rust 项目结构一致
@@ -21,21 +21,15 @@ NEAR 合约项目与普通的 Rust 项目结构一致
     └── lib.rs
 ```
 
-[near-sdk-rs](https://github.com/near/near-sdk-rs) 是 NEAR 合约发开的最常用工具, 我们需要在 [Cargo.toml](./Cargo.toml) 中导入该库
-```toml
-[dependencies]
-near-sdk = "4.1.1"
+[NEAR SDK](https://github.com/near/near-sdk-rs) 是 NEAR 合约发开的最常用工具, 我们需要导入该库 (本教程使用 `4.1.1` 版本)
+```shell
+cargo add near-sdk@4.1.1
 ```
 
-我们需要设置 `crate-type` 用于编译 WASM 二进制文件
+我们需要在 `Cargo.toml` 中设置 `crate-type` 用于编译 WASM 二进制文件
 ```toml
 [lib]
 crate-type = ["cdylib"]
-```
-
-配置完成后下载依赖
-```shell
-cargo fetch
 ```
 
 ## 合约代码解析
@@ -51,11 +45,11 @@ cargo fetch
 合约方法可以是
 * 第一个参数为 `&self` 的 View 方法
 * 第一个参数为 `&mut self` 的 Change 方法
-* 第一个参数与 `self` 无关的合约初始化方法或 View 方法
+* 第一个参数与 `self` 无关的合约初始化方法
 
 ### 合约初始化
 合约默认使用 `Default` trait 来初始化, 因此我们必须为根结构实现这个 trait, 但是 `default` 方法没有参数, 用于初始化不太灵活, 绝大多数情况下我们都会自定义初始化方法.
-`init` 方法就是一个带参数的初始化方法, 使用 `#[init]` 标记，同时我们还需要为根结构实现一个不可用的 `default` 方法 `#derive[PanicOnDefault]` 以通过编译.
+`init` 方法就是一个带参数的初始化方法, 使用 `#[init]` 标记, 同时我们还需要为根结构实现一个不可用的 `default` 方法 `#derive[PanicOnDefault]` 以通过编译.
 
 ### View 方法和 Change 方法
 `get_account_description` 方法第一个参数是 `&self` 无法修改合约状态, 因此是一个 View 方法;

@@ -26,7 +26,7 @@ export async function initContext(): Promise<Context> {
   const code = fs.readFileSync('res/hello_test.wasm');
 
   // 部署并初始化合约
-  await contract
+  const result = await contract
     .batch(contract.accountId)
     // Deploy Action
     .deployContract(code)
@@ -36,6 +36,12 @@ export async function initContext(): Promise<Context> {
     })
     // 执行交易
     .transact();
+
+  if (result.succeeded) {
+    console.log('Succeed to init contract');
+  } else {
+    throw Error(`Failed to init contract: ${result.Failure?.error_message}`);
+  }
 
   return { worker, root, contract, alice };
 }

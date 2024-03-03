@@ -1,12 +1,12 @@
 # 编写一个 FT 合约
-FT 即 fungible token 同质化通证
+FT 即 Fungible Token 同质化通证
 
 NEAR 的 FT 标准
 * [NEP141](https://github.com/near/NEPs/blob/master/neps/nep-0141.md)
 * [NEP148](https://github.com/near/NEPs/blob/master/neps/nep-0148.md)
 
 ## FT 标准实现
-near-contract-standards 实现了标准的 FT
+NEAR SDK 实现了标准的 FT, 需要额外引入 `near-contract-standards`
 ```toml
 [dependencies]
 near-sdk = "4.1.1"
@@ -86,8 +86,8 @@ pub trait FungibleTokenMetadataProvider {
 ```
 
 ## Mint 和 Burn
-mint 和 burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint 的时候对于没有注册 FT 持有者信息的用户, 需要先注册再 mint.
-也可以让用户自己从合约外部调用 `storage_deposit` 进行注册并支付存储费, 取决于开发者想怎么实现.
+Mint 和 Burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint 的时候对于没有注册 FT 持有者信息的用户, 需要先注册再 mint.
+也可以让用户自己从合约外部调用 `storage_deposit` 进行注册并支付存储费, 取决于开发者想怎么实现
 
 ## 接收合约
 如果一个合约需要感知到自己接收了用户转账的 FT, 则该合约需要实现 `ft_on_transfer` 来触发合约相关操作

@@ -1,5 +1,5 @@
 # 编写一个 NFT 合约
-NFT 即 non fungible token 非同质化通证
+NFT 即 Non Fungible Token 非同质化通证
 
 NEAR 的 NFT 标准
 * [NEP171](https://github.com/near/NEPs/blob/master/neps/nep-0171.md)
@@ -8,7 +8,7 @@ NEAR 的 NFT 标准
 * [NEP181](https://github.com/near/NEPs/blob/master/neps/nep-0181.md)
 
 ## NFT 标准实现
-near-contract-standards 实现了标准的 NFT
+NEAR SDK 实现了标准的 NFT, 需要额外引入 `near-contract-standards`
 ```toml
 [dependencies]
 near-sdk = "4.1.1"
@@ -129,8 +129,7 @@ pub trait NonFungibleTokenMetadataProvider {
 ```
 
 ## Mint 和 Burn
-mint 和 burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint NFT 会大量占用存储, 需要关注合约中用于存储质押的 NEAR 是否足够.
-标准 NFT 提供了一个 `internal_mint` 方法, 该方法需要调用 mint 的账户支付存储费, 如果合约不复杂也可以用这个方法来实现 mint 功能
+Mint 和 Burn 不是标准的操作, 因此我们需要自己实现. 需要注意的是 mint NFT 会大量占用存储, 需要关注合约中用于存储质押的 NEAR 是否足够
 
 ## 接收合约
 如果一个合约需要感知到自己接收了用户转账的 NFT, 则该合约需要实现 `nft_on_transfer` 来触发合约相关操作
@@ -151,13 +150,13 @@ pub trait NonFungibleTokenReceiver {
 如果一个合约需要感知到自己被用户授权了 NFT, 则该合约需要实现 `nft_on_approve` 来触发合约相关操作
 ```rust
 pub trait NonFungibleTokenApprovalReceiver {
-    // 授权合约的这个方法会被 `nft_approve` 调用
+    // 接收授权合约的这个方法会被 `nft_approve` 调用, 返回值没有明确含义
     fn nft_on_approve(
         &mut self,
         token_id: TokenId,
         owner_id: AccountId,
         approval_id: u64,
         msg: String,
-    ) -> near_sdk::PromiseOrValue<String>;
+    ) -> PromiseOrValue<String>;
 }
 ```

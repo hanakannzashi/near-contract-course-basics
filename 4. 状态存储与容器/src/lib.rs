@@ -13,45 +13,19 @@ pub struct Contract {
     descriptions: LookupMap<AccountId, String>,
 }
 
-// near-sdk 提供的容器在初始化的时候都需要唯一的 storage key
-// 可以使用 `#[derive(BorshStorageKey)]` 宏来获取 storage key. 它将枚举值按顺序以 `u8` 的方式进行 borsh 序列化, 最多可以得到 256 种不同的 storage key
+// 容器在初始化的时候都需要唯一的 Storage Key
+// 可以使用 `BorshStorageKey` 宏来获取 Storage Key
 #[derive(BorshSerialize, BorshStorageKey)]
 enum StorageKey {
-    // 以 0u8 的方式 borsh 序列化
     Descriptions,
 
-    // 以 1u8 的方式 borsh 序列化
     #[allow(unused)]
-    SecondKey,
+    UnusedKey,
 
-    /// 动态的 storage key, 通常用于容器嵌套的情况
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// use near_sdk::store::{LookupMap, Vector};
-    ///
-    /// #[near_bindgen]
-    /// #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
-    /// pub struct Contract {
-    ///     accounts: LookupMap<AccountId, Vector<String>>
-    /// }
-    ///
-    /// #[near_bindgen]
-    /// impl Contract {
-    ///     pub fn create(&mut self, account_id: AccountId) {
-    ///         let vector = Vector::new(StorageKey::DynamicKey {
-    ///             account_id: env::sha256_array(account_id.as_bytes()),
-    ///         });
-    ///         if self.accounts.insert(account_id, vector).is_some() {
-    ///             panic!("Account already exists");
-    ///         };
-    ///     }
-    /// }
-    /// ```
+    // 动态的 Storage Key, 通常用于容器嵌套的情况
     #[allow(unused)]
-    DynamicKey {
-        account_id: CryptoHash,
+    UnusedDynamicKey {
+        hash: CryptoHash,
     },
 }
 

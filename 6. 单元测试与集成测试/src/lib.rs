@@ -40,7 +40,7 @@ impl Contract {
     }
 }
 
-#[cfg(test)] // 标注测试模块
+#[cfg(test)]
 mod test {
     use crate::Contract;
     use near_sdk::test_utils::VMContextBuilder;
@@ -54,8 +54,8 @@ mod test {
         "bob.near".parse().unwrap()
     }
 
-    #[test] // 标注测试任务
-    #[should_panic(expected = "Only contract owner can call this method.")] // 错误信息
+    #[test]
+    #[should_panic(expected = "Only contract owner can call this method.")]
     fn test_setter_without_permission() {
         let mut contract = Contract::init(alice());
         contract.set_account_description(bob(), "Nice Bob".to_string());

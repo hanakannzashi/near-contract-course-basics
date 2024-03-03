@@ -13,9 +13,9 @@ cargo test
 
 ## 集成测试
 集成测试需要使用 workspaces, 会在本地起一个 sandbox, 模拟链上环境, 可以进行外部测试. 有 [workspaces-rs](https://github.com/near/workspaces-rs) 和 [workspaces-js](https://github.com/near/workspaces-js) 两种版本.
-其中 js 版本更加契合外部调用合约的习惯, 因此本教程选择 js 版本
+其中 JS 版本更加契合外部调用合约的习惯, 因此本教程选择 JS 版本
 
-### 安装 workspaces-js
+### 安装 workspaces
 ```shell
 yarn add near-workspaces -D
 ```
@@ -38,8 +38,6 @@ yarn add ts-jest jest @types/jest -D
   }
 }
 ```
-
-⚠️ jest 测试用例是并行的, 如果多个测试用例修改了同一个合约的状态, 可能会导致测试结果异常
 
 ### 运行集成测试
 jest 会自动寻找项目根目录下所有后缀为 `.sepc.ts` 或 `.test.ts` 的文件并执行测试代码
