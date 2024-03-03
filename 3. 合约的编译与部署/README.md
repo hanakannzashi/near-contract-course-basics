@@ -16,7 +16,7 @@ near
 ![near-cli-rs](./near-cli-rs.png)
 
 ### 切换 RPC
-NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们可能需要使用个人 RPC, 可以通过 [infura](https://infura.io) 免费注册个人 RPC
+NEAR [官方 RPC](https://rpc.testnet.near.org) 需要科学上网, 因此我们可能需要使用个人 RPC, 可以通过 [All That Node](https://www.allthatnode.com) 免费注册个人 RPC
 
 以 macOS 为例, 获取测试网 RPC 后编辑 `~/Library/Application\ Support/near-cli/config.toml` 文件, 修改 `[network_connection.testnet]` 下的 `rpc_url` 字段即可切换 RPC
 
