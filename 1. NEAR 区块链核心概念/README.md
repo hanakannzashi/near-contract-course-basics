@@ -2,20 +2,20 @@
 NEAR 是一条基于分片的异步区块链, 有一些与其他区块链不同的独特概念
 
 ## 出块时间
-NEAR 的出块时间在 1.2s 左右
+NEAR 的出块时间在 1.2 s 左右
 
 ## 最终确认
-NEAR 的最终确认时间是 1s 左右
+NEAR 的最终确认时间是 1 s 左右
 
 ## 单位换算
-`1 NEAR = 10^24 yoctoNEAR`
+`1 NEAR = 10 ^ 24 yoctoNEAR`
 
-`1 Tgas = 10^12 gas`. 单笔交易 gas 消耗上限为 `300 Tgas`
+`1 Tgas = 10 ^ 12 gas`. 单笔交易 gas 消耗上限为 `300 Tgas`
 
 ## 存储与 gas 价格
-NEAR 的存储价格为 `10^-5 NEAR / byte`
+NEAR 的存储价格为 `10 ^ -5 NEAR / Byte`
 
-NEAR 的 gas 价格为 `10^-4 NEAR / Tgas`
+NEAR 的 gas 价格为 `10 ^ -4 NEAR / Tgas`
 
 ## 分片
 NEAR 是一条全分片区块链, 没有所谓的主链用于协调分片. 
@@ -27,38 +27,38 @@ NEAR 是一条全分片区块链, 没有所谓的主链用于协调分片.
 Action 是 NEAR 链上操作的基本单位
 
 在 NEAR 上有且仅有以下 8 种 Action
-* Transfer: 转账 NEAR
-* FunctionCall: 合约调用
-* CreateAccount: 创建子账户
-* DeleteAccount: 删除账户
-* AddKey: 新增公钥
-* DeleteKey: 删除公钥
-* Deploy: 部署合约
-* Stake: 质押 NEAR
+* `Transfer`: 转账 NEAR
+* `FunctionCall`: 合约调用
+* `CreateAccount`: 创建子账户
+* `DeleteAccount`: 删除账户
+* `AddKey`: 新增公钥
+* `DeleteKey`: 删除公钥
+* `Deploy`: 部署合约
+* `Stake`: 质押 NEAR
 
 ## Transaction
-Transaction 是由用户私钥签名并支付 gas 费发起的一系列修改链上状态的 Action 的集合.
+Transaction 是由用户私钥签名并支付 gas 费发起的一系列修改链上状态的 Action 的集合
 
 Transaction 包括几个关键参数
-* signer id: 交易签名者
-* receiver id: 交易接收者
-* actions: Action 列表
-* txHash: 最近的任意一笔链上交易的哈希
-* publicKey: 用于验证签名的公钥
-* nonce: 比公钥当前 nonce 值大的新 nonce 值
+* `signer_id`: 交易签名者
+* `receiver_id`: 交易接收者
+* `actions`: Action 列表
+* `tx_hash`: 最近的任意一笔链上交易的哈希
+* `public_key`: 用于验证签名的公钥
+* `nonce`: 比公钥当前 nonce 值大的新 nonce 值
 
 ## Receipt
-Receipt 是为了处理跨分片通信而存在的概念.
+Receipt 是为了处理跨分片通信而存在的概念
 
 Transaction 被打包进区块后不会直接执行, 而是先转换为 Receipt, 可以认为 Receipt 是一种可执行的 Transaction 格式.
-Receipt 中的 Action 列表会在一个区块内执行完成, 执行具有原子性.
+Receipt 中的 Action 列表会在一个区块内执行完成, 执行具有原子性
 
 如果 Action 列表中包含 FunctionCall, 则执行完毕后可能产生新的子 Receipt.
 子 Receipt 会在后面的区块执行, 因此子 Receipt 中的 Action 列表与父 Receipt 中的 Action 列表之间**不具有原子性**.
 产生子 Receipt 是因为被调用的函数内部可能发生了跨合约调用 (FunctionCall Action) 或转账 (Transfer Action) 或其他操作, 这些操作都是异步的, 在函数被调用的那个区块不会执行
 
 ### Signer, Predecessor, Receiver
-Signer 是绝对概念, Predecessor 和 Receiver 是相对概念.
+Signer 是绝对概念, Predecessor 和 Receiver 是相对概念
 
 假设用户 Alice 发起一笔交易调用了 ContractA 合约, ContractA 合约又调用了 ContractB 合约.
 即 Alice -> ContractA -> ContractB.
@@ -83,10 +83,10 @@ NEAR 的账户是抽象账户, 可以在指定账户直接部署智能合约
 NEAR 的账户是多密钥对账户, 创建一个账户即向链上申请一个账户名, 然后绑定一个公钥到该账户名上, 通过对应的私钥访问该账户, 一个账户上面可以绑定多个公钥
 
 密钥分为两种权限
-* FullAccess: 完全访问权限
-* FunctionCall: 只允许调用特定的合约方法
+* `FullAccess`: 完全访问权限
+* `FunctionCallAccess`: 只允许调用特定的合约方法
 
-FunctionCall 权限的密钥通常在登陆 APP 的时候生成并给到 App 前端, 让 App 能自动帮用户签署低风险交易, 减少用户与钱包交互的频率, 从而优化用户的体验
+`FunctionCallAccess` 权限的密钥通常在登陆 APP 的时候生成并给到 App 前端, 让 App 能自动帮用户签署低风险交易, 减少用户与钱包交互的频率, 从而优化用户的体验
 
 ## 私钥
 NEAR 使用 ed25519 椭圆曲线
