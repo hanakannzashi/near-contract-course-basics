@@ -1,4 +1,4 @@
-# 第七章 编写一个 NFT 合约
+# 编写一个 NFT 合约
 NFT 即 non fungible token 非同质化通证
 
 NEAR 的 NFT 标准

@@ -1,4 +1,4 @@
-# 第二章 合约的编译与部署
+# 合约的编译与部署
 
 ## 安装 near-cli
 near-cli 是一个与 NEAR 区块链交互的终端工具, 有 [near-cli-rs](https://github.com/near/near-cli-rs) 和 [near-cli-js](https://github.com/near/near-cli) 两种版本.

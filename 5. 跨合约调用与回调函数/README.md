@@ -1,4 +1,4 @@
-# 第四章 跨合约调用与回调函数
+# 跨合约调用与回调函数
 NEAR 是一条异步链, 一笔交易会被拆分为一个或多个 Receipt 在不同的区块执行.
 Receipt 在 near-sdk 中被抽象为 `Promsie`, 发起跨合约调用就是创建一个包含 FunctionCall Action 的 `Promise`, 调用逻辑在当前方法执行的区块不会执行, 而是在之后的区块中异步执行
 

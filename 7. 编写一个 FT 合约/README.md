@@ -1,4 +1,4 @@
-# 第六章 编写一个 FT 合约
+# 编写一个 FT 合约
 FT 即 fungible token 同质化通证
 
 NEAR 的 FT 标准
