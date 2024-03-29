@@ -1,10 +1,10 @@
 {
+  "private": true,
   "scripts": {
     "test": "jest --testTimeout 60000 --detectOpenHandles",
     "lint": "eslint test/{**,}/*.ts --fix",
     "prettier": "prettier test/{**,}/*.ts --write"
   },
-  "private": true,
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^18.16.2",

@@ -26,7 +26,7 @@ workspaces 并不具备测试能力, 因此需要配合测试框架使用, 本�
 yarn add ts-jest jest @types/jest -D
 ```
 
-在 [package.json](./package.json) 中配置 jest
+在 [jest.config.json](./jest.config.json) 中配置 jest
 ```json
 {
   "jest": {
@@ -40,9 +40,9 @@ yarn add ts-jest jest @types/jest -D
 ```
 
 ### 运行集成测试
-jest 会自动寻找项目根目录下所有后缀为 `.sepc.ts` 或 `.test.ts` 的文件并执行测试代码
+jest 会自动寻找后缀为 `.sepc.ts` 或 `.test.ts` 的文件并执行测试代码
 ```shell
-yarn jest --testTimeout 60000 --detectOpenHandles
+yarn test
 ```
 
 ## 运行示例测试代码
