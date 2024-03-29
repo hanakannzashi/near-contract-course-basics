@@ -1,6 +1,9 @@
 {
-  "license": "UNLICENSED",
-  "description": "Integration test",
+  "scripts": {
+    "lint": "eslint test/{**,}/*.ts --fix",
+    "prettier": "prettier test/{**,}/*.ts --write"
+  },
+  "private": true,
   "devDependencies": {
     "@types/jest": "^29.5.3",
     "@types/node": "^18.16.2",
