@@ -6,10 +6,13 @@
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "eol-last": 2
+    "eol-last": 2,
+    "no-constant-condition": "off",
+    "@typescript-eslint/no-empty-function": [
+      "off"
+    ]
   }
 }

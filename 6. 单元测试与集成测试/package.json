@@ -1,31 +1,20 @@
 {
   "scripts": {
+    "test": "jest --testTimeout 60000 --detectOpenHandles",
     "lint": "eslint test/{**,}/*.ts --fix",
     "prettier": "prettier test/{**,}/*.ts --write"
   },
   "private": true,
   "devDependencies": {
-    "@types/jest": "^29.5.3",
+    "@types/jest": "^29.5.12",
     "@types/node": "^18.16.2",
-    "@typescript-eslint/eslint-plugin": "^5.38.0",
-    "@typescript-eslint/parser": "^5.38.0",
-    "eslint": "^8.46.0",
-    "jest": "^29.6.2",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
     "near-workspaces": "^3.5.0",
     "prettier": "^3.0.1",
-    "ts-jest": "^29.1.1",
-    "typescript": "^4.5.5"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "moduleDirectories": [
-      "node_modules"
-    ]
-  },
-  "prettier": {
-    "semi": true,
-    "singleQuote": true,
-    "printWidth": 120
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.3"
   }
 }
