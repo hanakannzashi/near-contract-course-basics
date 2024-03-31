@@ -6,9 +6,9 @@ lint-contract:
 	@cargo clippy --fix --allow-dirty --allow-staged
 
 lint-integration:
-	@yarn
-	@yarn lint
-	@yarn prettier
+	@pnpm install
+	@pnpm lint
+	@pnpm prettier
 
 lint: lint-contract lint-integration
 
@@ -22,7 +22,7 @@ test-unit:
 	@cargo test
 
 test-integration:
-	@yarn test
+	@pnpm test
 
 test: test-unit test-integration
 

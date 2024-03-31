@@ -9,6 +9,6 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "eol-last": 2
+    "eol-last": "error"
   }
 }
