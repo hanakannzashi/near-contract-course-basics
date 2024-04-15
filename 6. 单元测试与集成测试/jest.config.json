@@ -1,11 +1,5 @@
 {
   "preset": "ts-jest",
-  "testEnvironment": "node",
-  "moduleDirectories": [
-    "node_modules"
-  ],
-  "verbose": true,
   "detectOpenHandles": true,
-  "testTimeout": 60000,
-  "maxWorkers": 1
+  "testTimeout": 60000
 }
