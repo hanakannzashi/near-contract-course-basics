@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest --testTimeout 60000 --detectOpenHandles",
+    "test": "jest",
     "lint": "eslint test/{**,}/*.ts --fix",
     "prettier": "prettier test/{**,}/*.ts --write"
   },

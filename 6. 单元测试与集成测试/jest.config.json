@@ -3,5 +3,9 @@
   "testEnvironment": "node",
   "moduleDirectories": [
     "node_modules"
-  ]
+  ],
+  "verbose": true,
+  "detectOpenHandles": true,
+  "testTimeout": 60000,
+  "maxWorkers": 1
 }
