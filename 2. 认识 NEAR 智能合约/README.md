@@ -32,6 +32,12 @@ cargo add near-sdk@4.1.1
 crate-type = ["cdylib"]
 ```
 
+注: 若出现找不到 `parity-secp256k1` 的错误, 请在 `Cargo.toml` 中添加
+```toml
+[patch.crates-io]
+parity-secp256k1 = { git = 'https://github.com/paritytech/rust-secp256k1.git' }
+```
+
 ## 合约代码解析
 [lib.rs](./src/lib.rs) 是合约代码的入口, 本教程编写了一个非常简单的智能合约, 该合约有一个所有者权限 `owner_id`, 合约存储账户 `AccountId` 以及账户对应的描述信息 `String`.
 只有合约所有者可以修改描述信息，任何人都可以读取描述信息
