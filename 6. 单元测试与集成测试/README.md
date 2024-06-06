@@ -29,13 +29,9 @@ pnpm add ts-jest jest @types/jest -D
 在 [jest.config.json](./jest.config.json) 中配置 jest
 ```json
 {
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "moduleDirectories": [
-      "node_modules"
-    ]
-  }
+  "preset": "ts-jest",
+  "detectOpenHandles": true,
+  "testTimeout": 60000
 }
 ```
 
