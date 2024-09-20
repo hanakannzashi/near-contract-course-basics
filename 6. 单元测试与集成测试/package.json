@@ -1,13 +1,14 @@
 {
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "test": "jest",
-    "lint": "eslint test/{**,}/*.ts --fix",
-    "prettier": "prettier test/{**,}/*.ts --write"
+    "lint": "eslint 'test/**/*.ts' --fix",
+    "prettier": "prettier 'test/**/*.ts' --write --list-different"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "@types/node": "^18.16.2",
+    "@types/node": "^20.12.0",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "eslint": "^8.57.0",
@@ -15,7 +16,7 @@
     "near-workspaces": "^3.5.0",
     "prettier": "^3.0.1",
     "ts-jest": "^29.1.2",
-    "typescript": "^5.4.3"
+    "typescript": "5.4.3"
   },
   "engines": {
     "node": ">=20"

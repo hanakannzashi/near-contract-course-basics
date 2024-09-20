@@ -21,7 +21,9 @@ test('Test setter without permission', async () => {
     description: 'Nice Bob',
   });
 
-  await expect(promise).rejects.toThrow('Only contract owner can call this method.');
+  await expect(promise).rejects.toThrow(
+    'Only contract owner can call this method.',
+  );
 });
 
 test('Test setter getter', async () => {
